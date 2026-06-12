@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LawnCare V2.2</title>
-  <meta name="description" content="Bermuda lawn care helper with HOA records, feedback, language settings, and progress comparison." />
+  <title>LawnCare V2.2.1</title>
+  <meta name="description" content="Bermuda lawn care helper with HOA records, feedback, language settings, version log, and progress comparison." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,12 +13,22 @@
       <p class="eyebrow">Smyrna / Georgia · Bermuda Lawn</p>
       <h1 data-i18n="appTitle">草坪护理助手</h1>
       <p class="hero-copy" data-i18n="tagline">今天该做什么、如何记录证据、怎么给 HOA 解释，一步一步来。</p>
+
+      <div class="home-language-card" aria-label="Language selector">
+        <span class="language-label">🌐 <span data-i18n="language">语言</span></span>
+        <div class="segmented">
+          <button class="segment lang-btn" data-lang="zh" type="button">中文</button>
+          <button class="segment lang-btn" data-lang="en" type="button">English</button>
+        </div>
+      </div>
+
       <div class="hero-actions">
         <button class="switch" id="largeTextToggle" role="switch" aria-checked="false" type="button">
           <span data-i18n="largeText">大字模式</span>
           <span class="track" aria-hidden="true"><span class="thumb"></span></span>
           <b class="switch-state">OFF</b>
         </button>
+        <button class="ghost" data-go="versions" type="button">🧾 <span data-i18n="versions">版本记录</span></button>
         <button class="ghost" data-go="settings" type="button">⚙️ <span data-i18n="settings">设置</span></button>
       </div>
     </div>
@@ -29,7 +39,7 @@
   <main>
     <section id="home" class="panel active">
       <div class="card lead">
-        <p class="label" data-i18n="v22">V2.2 产品体验</p>
+        <p class="label" data-i18n="v221">V2.2.1 产品体验</p>
         <h2 data-i18n="homeTitle">四个动作，让护理更简单</h2>
         <p data-i18n="homeCopy">这个版本继续保持非 AI 优先：先把今日任务、问题判断、HOA 记录和进度对比做好。</p>
       </div>
@@ -60,20 +70,22 @@
           <b data-i18n="hoaReport">HOA 报告</b>
           <small data-i18n="reportDesc">打印、复制、导出</small>
         </button>
-        <button class="action-card" data-go="settings" type="button">
-          <span>⚙️</span>
-          <b data-i18n="settings">设置</b>
-          <small data-i18n="settingsDesc">语言和大字模式</small>
+        <button class="action-card" data-go="versions" type="button">
+          <span>🧾</span>
+          <b data-i18n="versionLog">版本记录</b>
+          <small data-i18n="versionLogDesc">查看每次发布改进</small>
         </button>
       </div>
 
-      <div class="card">
-        <h3 data-i18n="principlesTitle">产品原则</h3>
-        <ul class="check-list">
-          <li data-i18n="principle1">首页只保留少数高频动作，减少迷路。</li>
-          <li data-i18n="principle2">先提供稳定可用的非 AI 流程。</li>
-          <li data-i18n="principle3">每次护理都能沉淀为 HOA 证据。</li>
-        </ul>
+      <div class="card plugin-style">
+        <div class="plugin-header">
+          <span class="plugin-icon">✨</span>
+          <div>
+            <p class="label">Latest Release</p>
+            <h3 data-i18n="latestReleaseTitle">V2.2.1：更容易找到语言切换</h3>
+          </div>
+        </div>
+        <p data-i18n="latestReleaseCopy">语言按钮已移动到首页，版本记录也新增为正式页面，方便追踪产品演进。</p>
       </div>
     </section>
 
@@ -213,6 +225,59 @@
       <div id="reportTimeline" class="list"></div>
     </section>
 
+    <section id="versions" class="panel">
+      <div class="head">
+        <div>
+          <p class="label">Release Notes</p>
+          <h2 data-i18n="versionLog">版本记录</h2>
+        </div>
+      </div>
+
+      <div class="version-timeline">
+        <article class="version-card current">
+          <div class="version-badge">Current</div>
+          <h3>V2.2.1</h3>
+          <p class="version-date">2026-06-12</p>
+          <ul>
+            <li data-i18n="v221Item1">首页新增中文 / English 语言切换。</li>
+            <li data-i18n="v221Item2">新增浏览器插件风格的版本记录页面。</li>
+            <li data-i18n="v221Item3">新增最新发布提示卡片。</li>
+          </ul>
+        </article>
+
+        <article class="version-card">
+          <div class="version-badge stable">Stable</div>
+          <h3>V2.2</h3>
+          <p class="version-date">2026-06-12</p>
+          <ul>
+            <li data-i18n="v22Item1">新增中文 / English 设置。</li>
+            <li data-i18n="v22Item2">新增前后对比工作流。</li>
+            <li data-i18n="v22Item3">改进 HOA 报告摘要与备份导出。</li>
+          </ul>
+        </article>
+
+        <article class="version-card">
+          <div class="version-badge stable">UX</div>
+          <h3>V2.1</h3>
+          <p class="version-date">2026-06-12</p>
+          <ul>
+            <li data-i18n="v21Item1">大字模式改为开关样式。</li>
+            <li data-i18n="v21Item2">新增反馈页面。</li>
+          </ul>
+        </article>
+
+        <article class="version-card">
+          <div class="version-badge stable">Foundation</div>
+          <h3>V2.0</h3>
+          <p class="version-date">2026-06-12</p>
+          <ul>
+            <li data-i18n="v20Item1">移除未启用的 AI 流程。</li>
+            <li data-i18n="v20Item2">建立非 AI 优先的 HOA 记录产品方向。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
     <section id="feedback" class="panel">
       <div class="head">
         <div>
@@ -278,7 +343,7 @@
 
       <div class="card">
         <h3 data-i18n="about">关于</h3>
-        <p data-i18n="aboutCopy">V2.2 是非 AI 优先版本：先让护理、记录、对比和 HOA 报告稳定可用。</p>
+        <p data-i18n="aboutCopy">V2.2.1 是非 AI 优先版本：先让护理、记录、对比、版本记录和 HOA 报告稳定可用。</p>
       </div>
     </section>
   </main>

@@ -2,9 +2,19 @@
 
 Live site: https://lawncare-sj4.pages.dev/
 
-## V2.2
+## V2.2.1
 
-LawnCare is a non-AI-first Bermuda lawn helper focused on reliable homeowner workflows:
+LawnCare is a non-AI-first Bermuda lawn helper focused on reliable homeowner workflows.
+
+### New in V2.2.1
+
+- Moved Chinese / English language controls to the front page
+- Added Version Log page
+- Added browser-plugin-style release timeline cards
+- Added latest-release highlight card
+- Added V2.2.1 deployment notes
+
+## Current features
 
 - Daily task guidance
 - Manual lawn problem guide
@@ -14,12 +24,6 @@ LawnCare is a non-AI-first Bermuda lawn helper focused on reliable homeowner wor
 - Large text accessibility switch
 - Before / after progress comparison
 - HOA report summary, print, and backup export
-
-## Product direction
-
-The app prioritizes usefulness for middle-aged and less tech-savvy homeowners. The core question is:
-
-> What should I do today, and how do I prove progress to my HOA?
 
 ## Future AI roadmap
 

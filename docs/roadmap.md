@@ -1,6 +1,13 @@
 # Roadmap
 
-## V2.2 - Current
+## V2.2.1 - Current
+
+- Move Chinese / English language controls to the home page
+- Add Version Log page
+- Add browser-plugin-style release cards
+- Keep V2.2 stable flows intact
+
+## V2.2 - Stable base
 
 - Language toggle
 - Large text toggle switch

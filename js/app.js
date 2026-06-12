@@ -15,15 +15,16 @@ const navItems=[
   ['compare','🖼️','compare'],
   ['report','📋','report'],
   ['feedback','💬','feedback'],
+  ['versions','🧾','versions'],
   ['settings','⚙️','settings']
 ];
 
 const zh={
   appTitle:'草坪护理助手',tagline:'今天该做什么、如何记录证据、怎么给 HOA 解释，一步一步来。',
-  settings:'设置',largeText:'大字模式',home:'首页',today:'今日',guide:'查问题',log:'记录',compare:'对比',report:'报告',feedback:'反馈',
-  v22:'V2.2 产品体验',homeTitle:'四个动作，让护理更简单',homeCopy:'这个版本继续保持非 AI 优先：先把今日任务、问题判断、HOA 记录和进度对比做好。',
+  settings:'设置',largeText:'大字模式',home:'首页',today:'今日',guide:'查问题',log:'记录',compare:'对比',report:'报告',feedback:'反馈',versions:'版本记录',versionLog:'版本记录',
+  v22:'V2.2 产品体验',v221:'V2.2.1 产品体验',homeTitle:'四个动作，让护理更简单',homeCopy:'这个版本继续保持非 AI 优先：先把今日任务、问题判断、HOA 记录和进度对比做好。',
   todayTask:'今天该做什么',todayDesc:'按月份显示重点任务',problemGuide:'查草坪问题',guideDesc:'手动症状清单',addRecord:'添加 HOA 记录',logDesc:'日期、操作、照片',
-  beforeAfter:'前后对比',compareDesc:'证明进步最直观',hoaReport:'HOA 报告',reportDesc:'打印、复制、导出',settingsDesc:'语言和大字模式',
+  beforeAfter:'前后对比',compareDesc:'证明进步最直观',hoaReport:'HOA 报告',reportDesc:'打印、复制、导出',settingsDesc:'语言和大字模式',versionLogDesc:'查看每次发布改进',latestReleaseTitle:'V2.2.1：更容易找到语言切换',latestReleaseCopy:'语言按钮已移动到首页，版本记录也新增为正式页面，方便追踪产品演进。',v221Item1:'首页新增中文 / English 语言切换。',v221Item2:'新增浏览器插件风格的版本记录页面。',v221Item3:'新增最新发布提示卡片。',v22Item1:'新增中文 / English 设置。',v22Item2:'新增前后对比工作流。',v22Item3:'改进 HOA 报告摘要与备份导出。',v21Item1:'大字模式改为开关样式。',v21Item2:'新增反馈页面。',v20Item1:'移除未启用的 AI 流程。',v20Item2:'建立非 AI 优先的 HOA 记录产品方向。',
   principlesTitle:'产品原则',principle1:'首页只保留少数高频动作，减少迷路。',principle2:'先提供稳定可用的非 AI 流程。',principle3:'每次护理都能沉淀为 HOA 证据。',
   todayTitle:'今天的重点任务',guideTitle:'手动草坪问题判断',chooseProblem:'选择你看到的问题',logTitle:'添加护理记录',
   date:'日期',type:'类型',actionTaken:'做了什么',area:'位置',notes:'备注',photoOptional:'照片证据（可选）',saveRecord:'保存记录',
@@ -35,10 +36,10 @@ const zh={
 
 const en={
   appTitle:'Lawn Care Assistant',tagline:'Know what to do today, keep proof, and explain progress to the HOA step by step.',
-  settings:'Settings',largeText:'Large Text',home:'Home',today:'Today',guide:'Problems',log:'Records',compare:'Compare',report:'Report',feedback:'Feedback',
-  v22:'V2.2 Product Experience',homeTitle:'Four actions make lawn care simple',homeCopy:'This release remains non-AI first: daily tasks, manual problem checks, HOA records, and visible progress.',
+  settings:'Settings',largeText:'Large Text',home:'Home',today:'Today',guide:'Problems',log:'Records',compare:'Compare',report:'Report',feedback:'Feedback',versions:'Version Log',versionLog:'Version Log',
+  v22:'V2.2 Product Experience',v221:'V2.2.1 Product Experience',homeTitle:'Four actions make lawn care simple',homeCopy:'This release remains non-AI first: daily tasks, manual problem checks, HOA records, and visible progress.',
   todayTask:"Today's Task",todayDesc:'Seasonal priority tasks',problemGuide:'Check Lawn Problem',guideDesc:'Manual symptom guide',addRecord:'Add HOA Record',logDesc:'Date, action, photo',
-  beforeAfter:'Before / After',compareDesc:'Show progress clearly',hoaReport:'HOA Report',reportDesc:'Print, copy, export',settingsDesc:'Language and large text',
+  beforeAfter:'Before / After',compareDesc:'Show progress clearly',hoaReport:'HOA Report',reportDesc:'Print, copy, export',settingsDesc:'Language and large text',versionLogDesc:'Review each product update',latestReleaseTitle:'V2.2.1: Language switching is easier to find',latestReleaseCopy:'Language controls moved to the home page, and a version log page now tracks product improvements.',v221Item1:'Added Chinese / English switch to the home page.',v221Item2:'Added a browser-plugin-style version log page.',v221Item3:'Added latest-release highlight card.',v22Item1:'Added Chinese / English settings.',v22Item2:'Added before / after comparison workflow.',v22Item3:'Improved HOA summary and backup export.',v21Item1:'Converted large text into a switch control.',v21Item2:'Added feedback page.',v20Item1:'Removed non-enabled AI flows.',v20Item2:'Established non-AI-first HOA record workflow.',
   principlesTitle:'Product Principles',principle1:'Keep only a few frequent actions on the home screen.',principle2:'Provide stable non-AI workflows first.',principle3:'Every care action becomes HOA evidence.',
   todayTitle:"Today's Priority Tasks",guideTitle:'Manual Lawn Problem Guide',chooseProblem:'Choose what you see',logTitle:'Add Care Record',
   date:'Date',type:'Type',actionTaken:'What did you do?',area:'Area',notes:'Notes',photoOptional:'Photo evidence optional',saveRecord:'Save Record',
@@ -95,6 +96,10 @@ function applyLanguage(){
   $$('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n);});
   setupNav();
   renderAll();
+}
+
+function updateLanguageButtons(){
+  $$('.lang-btn,.segment').forEach(btn=>btn.classList.toggle('active-lang',btn.dataset.lang===settings.lang));
 }
 
 function updateSwitches(){
@@ -200,6 +205,7 @@ function renderAll(){
   renderReport();
   renderFeedback();
   updateSwitches();
+  updateLanguageButtons();
 }
 
 function exportBackup(){
@@ -248,7 +254,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 
-  $$('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  $$('.lang-btn,.segment').forEach(btn=>btn.addEventListener('click',()=>{
     settings.lang=btn.dataset.lang;
     save();
     applyLanguage();
