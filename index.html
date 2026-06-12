@@ -1,311 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>草坪护理助手 | HOA 记录</title>
-  <meta name="description" content="Simple Bermuda lawn care assistant with manual problem guide and HOA-ready logs." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LawnCare V2.2</title>
+  <meta name="description" content="Bermuda lawn care helper with HOA records, feedback, language settings, and progress comparison." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header class="hero">
-    <div class="hero__content">
+    <div class="hero-inner">
       <p class="eyebrow">Smyrna / Georgia · Bermuda Lawn</p>
-      <h1>草坪护理助手</h1>
-      <p class="hero__subtitle">不用复杂技术。今天该做什么、发现问题怎么处理、HOA 记录怎么保存，一步一步来。</p>
-      <div class="hero__actions">
-        <button class="pill-button" id="largeTextToggle" type="button">🔎 大字模式</button>
-        <button class="pill-button" data-nav="report" type="button">📤 HOA 报告</button>
+      <h1 data-i18n="appTitle">草坪护理助手</h1>
+      <p class="hero-copy" data-i18n="tagline">今天该做什么、如何记录证据、怎么给 HOA 解释，一步一步来。</p>
+      <div class="hero-actions">
+        <button class="switch" id="largeTextToggle" role="switch" aria-checked="false" type="button">
+          <span data-i18n="largeText">大字模式</span>
+          <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          <b class="switch-state">OFF</b>
+        </button>
+        <button class="ghost" data-go="settings" type="button">⚙️ <span data-i18n="settings">设置</span></button>
       </div>
     </div>
   </header>
 
-  <nav class="top-nav" aria-label="主要导航">
-    <button class="nav-btn active" data-nav="home" type="button">首页</button>
-    <button class="nav-btn" data-nav="today" type="button">今日</button>
-    <button class="nav-btn" data-nav="guide" type="button">查问题</button>
-    <button class="nav-btn" data-nav="log" type="button">记录</button>
-    <button class="nav-btn" data-nav="report" type="button">报告</button>
-  </nav>
+  <nav class="tabs" id="topNav" aria-label="Primary navigation"></nav>
 
   <main>
-    <section id="home" class="panel active" aria-labelledby="home-title">
-      <div class="welcome-card">
-        <div>
-          <p class="small-label">推荐流程</p>
-          <h2 id="home-title">先看今天该做什么，再保存证据</h2>
-          <p>所有建议来自固定护理规则、手动问题清单和你的护理记录，稳定、可解释，适合给 HOA 查看。</p>
-        </div>
+    <section id="home" class="panel active">
+      <div class="card lead">
+        <p class="label" data-i18n="v22">V2.2 产品体验</p>
+        <h2 data-i18n="homeTitle">四个动作，让护理更简单</h2>
+        <p data-i18n="homeCopy">这个版本继续保持非 AI 优先：先把今日任务、问题判断、HOA 记录和进度对比做好。</p>
       </div>
 
       <div class="action-grid">
-        <button class="action-card" data-nav="today" type="button">
-          <span class="action-card__icon">✅</span>
-          <span class="action-card__title">今天该做什么</span>
-          <span class="action-card__desc">按月份显示最重要的护理任务</span>
+        <button class="action-card" data-go="today" type="button">
+          <span>✅</span>
+          <b data-i18n="todayTask">今天该做什么</b>
+          <small data-i18n="todayDesc">按月份显示重点任务</small>
         </button>
-        <button class="action-card" data-nav="guide" type="button">
-          <span class="action-card__icon">🔍</span>
-          <span class="action-card__title">查草坪问题</span>
-          <span class="action-card__desc">用症状清单判断杂草、黄斑、干旱等</span>
+        <button class="action-card" data-go="guide" type="button">
+          <span>🔍</span>
+          <b data-i18n="problemGuide">查草坪问题</b>
+          <small data-i18n="guideDesc">手动症状清单</small>
         </button>
-        <button class="action-card" data-nav="log" type="button">
-          <span class="action-card__icon">📸</span>
-          <span class="action-card__title">添加 HOA 记录</span>
-          <span class="action-card__desc">保存日期、产品、备注和照片</span>
+        <button class="action-card" data-go="log" type="button">
+          <span>📸</span>
+          <b data-i18n="addRecord">添加 HOA 记录</b>
+          <small data-i18n="logDesc">日期、操作、照片</small>
         </button>
-        <button class="action-card" data-nav="report" type="button">
-          <span class="action-card__icon">📋</span>
-          <span class="action-card__title">导出 HOA 报告</span>
-          <span class="action-card__desc">一键打印或导出 CSV / JSON 备份</span>
+        <button class="action-card" data-go="compare" type="button">
+          <span>🖼️</span>
+          <b data-i18n="beforeAfter">前后对比</b>
+          <small data-i18n="compareDesc">证明进步最直观</small>
         </button>
-      </div>
-
-      <section class="card">
-        <h3>本版本的产品原则</h3>
-        <ul class="check-list">
-          <li>不要让用户在 7 个标签里迷路，首页只保留 4 个大动作。</li>
-          <li>只展示今天能稳定工作的功能，避免让用户误以为拍照会自动判断。</li>
-          <li>先把 HOA 证据链做好：日期、操作、产品、照片、状态评分。</li>
-          <li>建议必须可解释，方便家人或 HOA 理解。</li>
-        </ul>
-      </section>
-    </section>
-
-    <section id="today" class="panel" aria-labelledby="today-title">
-      <div class="section-head">
-        <div>
-          <p class="small-label" id="todayDate">Today</p>
-          <h2 id="today-title">今天的重点任务</h2>
-        </div>
-        <button class="secondary-btn" data-nav="plan" type="button">查看全年计划</button>
-      </div>
-
-      <div id="seasonSummary" class="notice-card"></div>
-      <div id="todayTasks" class="task-list"></div>
-
-      <section class="card">
-        <h3>今天只需要记住 3 件事</h3>
-        <ol class="number-list">
-          <li><strong>先观察：</strong>颜色是否均匀、有无圆形黄斑、有无爬地杂草。</li>
-          <li><strong>再操作：</strong>割草、浇水、施肥、除草不要全部挤在同一天。</li>
-          <li><strong>最后记录：</strong>拍一张照片，保存到 HOA 记录。</li>
-        </ol>
-      </section>
-    </section>
-
-    <section id="guide" class="panel" aria-labelledby="guide-title">
-      <div class="section-head">
-        <div>
-          <p class="small-label">Manual Problem Guide</p>
-          <h2 id="guide-title">手动草坪问题判断</h2>
-        </div>
-      </div>
-
-      <div class="notice-card">
-        <strong>使用方法：</strong>先选最像的症状，再对照“怎么看”和“下一步怎么做”。如果不确定，保存照片到 HOA 记录，连续 1–2 周观察变化。
+        <button class="action-card" data-go="report" type="button">
+          <span>📋</span>
+          <b data-i18n="hoaReport">HOA 报告</b>
+          <small data-i18n="reportDesc">打印、复制、导出</small>
+        </button>
+        <button class="action-card" data-go="settings" type="button">
+          <span>⚙️</span>
+          <b data-i18n="settings">设置</b>
+          <small data-i18n="settingsDesc">语言和大字模式</small>
+        </button>
       </div>
 
       <div class="card">
-        <label class="form-label" for="problemSelect">选择你看到的问题</label>
-        <select id="problemSelect" class="input">
-          <option value="buttonweed">爬地杂草 / 小白花：可能是 Virginia Buttonweed</option>
-          <option value="crabgrass">浅绿色粗叶杂草：可能是 Crabgrass</option>
-          <option value="nutsedge">长得特别快的黄绿色草：可能是 Nutsedge</option>
-          <option value="brownpatch">圆形黄斑 / 棕斑：可能是霉菌或 Brown Patch</option>
-          <option value="drought">脚踩后不回弹 / 草发灰：可能是缺水</option>
-          <option value="scalping">割完后露黄/露土：可能是割草过低或地面不平</option>
-          <option value="thin">稀疏、裸土、长不满：可能是光照/土壤/压实问题</option>
-          <option value="unknown">不确定：先做观察记录</option>
+        <h3 data-i18n="principlesTitle">产品原则</h3>
+        <ul class="check-list">
+          <li data-i18n="principle1">首页只保留少数高频动作，减少迷路。</li>
+          <li data-i18n="principle2">先提供稳定可用的非 AI 流程。</li>
+          <li data-i18n="principle3">每次护理都能沉淀为 HOA 证据。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="today" class="panel">
+      <div class="head">
+        <div>
+          <p class="label" id="dateLabel"></p>
+          <h2 data-i18n="todayTitle">今天的重点任务</h2>
+        </div>
+      </div>
+      <div class="notice" id="seasonBox"></div>
+      <div id="taskList" class="list"></div>
+    </section>
+
+    <section id="guide" class="panel">
+      <div class="head">
+        <div>
+          <p class="label">Manual Guide</p>
+          <h2 data-i18n="guideTitle">手动草坪问题判断</h2>
+        </div>
+      </div>
+      <div class="card">
+        <label for="problem" data-i18n="chooseProblem">选择你看到的问题</label>
+        <select id="problem" class="input">
+          <option value="buttonweed">Virginia Buttonweed / 弗吉尼亚纽扣草</option>
+          <option value="crabgrass">Crabgrass / 马唐草</option>
+          <option value="nutsedge">Nutsedge / 莎草</option>
+          <option value="brownpatch">Brown Patch / 霉菌黄斑</option>
+          <option value="drought">Drought Stress / 缺水</option>
+          <option value="thin">Thin Lawn / 稀疏裸土</option>
         </select>
       </div>
-
-      <div id="problemResult" class="problem-result"></div>
-
-      <section class="card">
-        <h3>拍照记录标准</h3>
-        <ul class="check-list">
-          <li>每次从同一个方向拍：门口、车道边、邮箱旁等固定位置。</li>
-          <li>近照 + 远照各一张：近照看杂草，远照看整体进度。</li>
-          <li>照片当天同时记录天气、操作和产品名称。</li>
-        </ul>
-      </section>
+      <div class="card" id="problemOutput"></div>
     </section>
 
-    <section id="plan" class="panel" aria-labelledby="plan-title">
-      <div class="section-head">
+    <section id="log" class="panel">
+      <div class="head">
         <div>
-          <p class="small-label">Bermuda Calendar</p>
-          <h2 id="plan-title">百慕大草全年护理计划</h2>
-        </div>
-      </div>
-      <div id="monthPlan" class="month-grid"></div>
-    </section>
-
-    <section id="products" class="panel" aria-labelledby="products-title">
-      <div class="section-head">
-        <div>
-          <p class="small-label">Shopping Guide</p>
-          <h2 id="products-title">产品指南</h2>
+          <p class="label">HOA Evidence</p>
+          <h2 data-i18n="logTitle">添加护理记录</h2>
         </div>
       </div>
 
-      <div class="notice-card">
-        购买和使用任何除草剂、杀菌剂或肥料前，请以产品标签为准，确认适用于 Bermuda grass，并遵守当地规定。
-      </div>
-
-      <div class="product-grid">
-        <article class="product-card">
-          <h3>施肥</h3>
-          <p><strong>用途：</strong>生长季维持草坪颜色和密度。</p>
-          <p><strong>例子：</strong>Scotts Turf Builder Bermuda / Southern Lawn 类产品。</p>
-          <p><strong>提醒：</strong>九月后不要继续高氮施肥。</p>
-        </article>
-        <article class="product-card">
-          <h3>阔叶杂草</h3>
-          <p><strong>用途：</strong>Virginia Buttonweed、Clover 等阔叶杂草。</p>
-          <p><strong>例子：</strong>Bermuda-safe broadleaf weed killer，或 Celsius WG 类专业产品。</p>
-          <p><strong>提醒：</strong>高温喷药要谨慎，严格看标签。</p>
-        </article>
-        <article class="product-card">
-          <h3>莎草 / Nutsedge</h3>
-          <p><strong>用途：</strong>黄绿色、长得比草快的三角茎杂草。</p>
-          <p><strong>例子：</strong>Nutsedge-specific 产品，如 SedgeHammer / Image 类。</p>
-          <p><strong>提醒：</strong>不要手拔，容易刺激地下块茎扩散。</p>
-        </article>
-        <article class="product-card">
-          <h3>霉菌 / Brown Patch</h3>
-          <p><strong>用途：</strong>湿热季节出现圆形黄斑或棕斑。</p>
-          <p><strong>例子：</strong>Scotts DiseaseEx 或 BioAdvanced Fungus Control 类。</p>
-          <p><strong>提醒：</strong>配合早晨浇水，避免傍晚浇水。</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="log" class="panel" aria-labelledby="log-title">
-      <div class="section-head">
-        <div>
-          <p class="small-label">HOA Evidence Log</p>
-          <h2 id="log-title">添加护理记录</h2>
-        </div>
-        <button class="secondary-btn" data-nav="report" type="button">查看统计</button>
-      </div>
-
-      <form id="logForm" class="log-form">
-        <div class="form-grid">
+      <form id="logForm" class="card form">
+        <div class="two">
           <div>
-            <label class="form-label" for="logDate">日期</label>
-            <input class="input" type="date" id="logDate" required />
+            <label for="logDate" data-i18n="date">日期</label>
+            <input id="logDate" type="date" class="input" required />
           </div>
           <div>
-            <label class="form-label" for="logType">类型</label>
-            <select class="input" id="logType">
-              <option value="mow">✂️ 割草</option>
-              <option value="water">💧 浇水 / 调整喷灌</option>
-              <option value="fertilize">🌿 施肥</option>
-              <option value="weed">🌱 除草 / 杂草处理</option>
-              <option value="disease">🍄 病害 / 黄斑处理</option>
-              <option value="photo">📸 照片进度</option>
-              <option value="general">📝 其他</option>
+            <label for="logType" data-i18n="type">类型</label>
+            <select id="logType" class="input">
+              <option value="mow">Mow / 割草</option>
+              <option value="water">Water / 浇水</option>
+              <option value="fertilize">Fertilize / 施肥</option>
+              <option value="weed">Weed / 除草</option>
+              <option value="disease">Disease / 病害</option>
+              <option value="photo">Photo / 照片</option>
+              <option value="general">General / 其他</option>
             </select>
           </div>
         </div>
 
-        <label class="form-label" for="logTitle">做了什么 / 使用什么产品</label>
-        <input class="input" type="text" id="logTitle" placeholder="例如：割草到 1.5 英寸；喷了阔叶杂草除草剂" required />
+        <label for="logAction" data-i18n="actionTaken">做了什么</label>
+        <input id="logAction" class="input" required placeholder="Mowed to 1.5 inches" />
 
-        <label class="form-label" for="logArea">位置</label>
-        <input class="input" type="text" id="logArea" placeholder="例如：前院靠车道、邮箱旁、后院左侧" />
+        <label for="logArea" data-i18n="area">位置</label>
+        <input id="logArea" class="input" placeholder="Front yard near driveway" />
 
-        <label class="form-label" for="logNotes">备注</label>
-        <textarea class="input textarea" id="logNotes" placeholder="天气、草坪颜色、发现的问题、下次要做什么"></textarea>
+        <label for="logNotes" data-i18n="notes">备注</label>
+        <textarea id="logNotes" class="input" rows="3"></textarea>
 
-        <fieldset class="rating-field">
-          <legend>今天草坪状态</legend>
-          <div class="rating-row" id="ratingRow">
-            <button type="button" class="rating-btn" data-rating="1">😟 差</button>
-            <button type="button" class="rating-btn" data-rating="2">😐 一般</button>
-            <button type="button" class="rating-btn" data-rating="3">🙂 还好</button>
-            <button type="button" class="rating-btn" data-rating="4">😊 良好</button>
-            <button type="button" class="rating-btn" data-rating="5">🌟 很棒</button>
-          </div>
-        </fieldset>
+        <label for="logPhoto" data-i18n="photoOptional">照片证据（可选）</label>
+        <input id="logPhoto" class="input" type="file" accept="image/*" capture="environment" />
+        <img id="photoPreview" class="preview" alt="" />
 
-        <label class="form-label" for="logPhoto">照片证据（可选）</label>
-        <input class="input" type="file" id="logPhoto" accept="image/*" capture="environment" />
-        <img id="photoPreview" class="photo-preview" alt="照片预览" />
-
-        <button class="primary-btn" type="submit">✅ 保存记录</button>
+        <button class="primary" type="submit" data-i18n="saveRecord">保存记录</button>
       </form>
 
-      <div class="section-head compact">
-        <h3>护理历史</h3>
-        <select id="logFilter" class="input compact-input">
-          <option value="all">全部记录</option>
-          <option value="mow">割草</option>
-          <option value="water">浇水</option>
-          <option value="fertilize">施肥</option>
-          <option value="weed">除草</option>
-          <option value="disease">病害</option>
-          <option value="photo">照片</option>
-          <option value="general">其他</option>
-        </select>
-      </div>
-      <div id="logEntries" class="log-list"></div>
+      <div id="logList" class="list"></div>
     </section>
 
-    <section id="report" class="panel" aria-labelledby="report-title">
-      <div class="section-head">
+    <section id="compare" class="panel">
+      <div class="head">
         <div>
-          <p class="small-label">HOA Report</p>
-          <h2 id="report-title">HOA 进度报告</h2>
+          <p class="label">Before / After</p>
+          <h2 data-i18n="compareTitle">前后对比</h2>
         </div>
       </div>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span id="statTotal" class="stat-number">0</span>
-          <span class="stat-label">总记录</span>
+      <div class="card">
+        <p data-i18n="compareHelp">上传同一区域的“之前”和“现在”照片，用来向 HOA 展示改善。</p>
+        <div class="two">
+          <div>
+            <label for="beforePhoto" data-i18n="beforePhoto">之前照片</label>
+            <input id="beforePhoto" class="input" type="file" accept="image/*" />
+            <img id="beforeImg" class="preview" alt="" />
+          </div>
+          <div>
+            <label for="afterPhoto" data-i18n="afterPhoto">现在照片</label>
+            <input id="afterPhoto" class="input" type="file" accept="image/*" />
+            <img id="afterImg" class="preview" alt="" />
+          </div>
         </div>
-        <div class="stat-card">
-          <span id="statDays" class="stat-number">0</span>
-          <span class="stat-label">护理天数</span>
-        </div>
-        <div class="stat-card">
-          <span id="statPhotos" class="stat-number">0</span>
-          <span class="stat-label">照片证据</span>
-        </div>
-        <div class="stat-card">
-          <span id="statScore" class="stat-number">—</span>
-          <span class="stat-label">最近评分</span>
+        <label for="compareNote" data-i18n="comparisonNote">对比说明</label>
+        <textarea id="compareNote" class="input" rows="3" placeholder="Weeds reduced, color improved..."></textarea>
+        <button id="saveCompare" class="primary" type="button" data-i18n="saveComparison">保存对比</button>
+      </div>
+
+      <div id="compareList" class="list"></div>
+    </section>
+
+    <section id="report" class="panel">
+      <div class="head">
+        <div>
+          <p class="label">HOA Report</p>
+          <h2 data-i18n="reportTitle">HOA 进度报告</h2>
         </div>
       </div>
 
-      <section class="card">
-        <h3>一键导出</h3>
-        <p>报告会使用当前浏览器里保存的记录。现在的版本是本地存储；以后可升级到 Supabase，实现手机、iPad、电脑同步。</p>
-        <div class="button-row">
-          <button class="primary-btn" id="printReportBtn" type="button">📄 打印 / 保存 PDF</button>
-          <button class="secondary-btn" id="exportCsvBtn" type="button">📊 导出 CSV</button>
-          <button class="secondary-btn" id="exportJsonBtn" type="button">💾 JSON 备份</button>
-        </div>
-      </section>
+      <div class="stats">
+        <div><b id="statLogs">0</b><span data-i18n="records">记录</span></div>
+        <div><b id="statPhotos">0</b><span data-i18n="photos">照片</span></div>
+        <div><b id="statComparisons">0</b><span data-i18n="comparisons">对比</span></div>
+      </div>
 
-      <section class="card">
-        <h3>HOA 说明模板</h3>
-        <p id="hoaSummaryText">添加护理记录后，这里会自动生成一段简短说明。</p>
-        <button class="secondary-btn" id="copySummaryBtn" type="button">复制说明</button>
-      </section>
+      <div class="card">
+        <h3 data-i18n="summary">摘要</h3>
+        <p id="summaryText"></p>
+        <div class="row">
+          <button id="copySummary" class="secondary" type="button" data-i18n="copySummary">复制摘要</button>
+          <button id="printReport" class="primary" type="button" data-i18n="printReport">打印 / 保存 PDF</button>
+          <button id="exportData" class="secondary" type="button" data-i18n="exportData">导出备份</button>
+        </div>
+      </div>
+
+      <div id="reportTimeline" class="list"></div>
+    </section>
+
+    <section id="feedback" class="panel">
+      <div class="head">
+        <div>
+          <p class="label">Feedback</p>
+          <h2 data-i18n="feedbackTitle">反馈与改进建议</h2>
+        </div>
+      </div>
+
+      <form id="feedbackForm" class="card form">
+        <div class="two">
+          <div>
+            <label for="feedbackType" data-i18n="feedbackType">反馈类型</label>
+            <select id="feedbackType" class="input">
+              <option>Text too small / 字太小</option>
+              <option>Hard to find / 找不到功能</option>
+              <option>Report unclear / 报告不清楚</option>
+              <option>Feature idea / 功能建议</option>
+            </select>
+          </div>
+          <div>
+            <label for="feedbackEase" data-i18n="difficulty">使用难度</label>
+            <select id="feedbackEase" class="input">
+              <option>Easy / 容易</option>
+              <option>OK / 还可以</option>
+              <option>Hard / 有点难</option>
+            </select>
+          </div>
+        </div>
+        <label for="feedbackTitleInput" data-i18n="title">标题</label>
+        <input id="feedbackTitleInput" class="input" required />
+        <label for="feedbackNote" data-i18n="details">详细说明</label>
+        <textarea id="feedbackNote" class="input" rows="3"></textarea>
+        <button class="primary" type="submit" data-i18n="saveFeedback">保存反馈</button>
+      </form>
+
+      <div id="feedbackList" class="list"></div>
+    </section>
+
+    <section id="settings" class="panel">
+      <div class="head">
+        <div>
+          <p class="label">Settings</p>
+          <h2 data-i18n="settingsTitle">设置</h2>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="language">语言</h3>
+        <div class="row">
+          <button class="secondary lang-btn" data-lang="zh" type="button">中文</button>
+          <button class="secondary lang-btn" data-lang="en" type="button">English</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="accessibility">辅助功能</h3>
+        <button class="switch dark" id="largeTextToggleSettings" role="switch" aria-checked="false" type="button">
+          <span data-i18n="largeText">大字模式</span>
+          <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          <b class="switch-state">OFF</b>
+        </button>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="about">关于</h3>
+        <p data-i18n="aboutCopy">V2.2 是非 AI 优先版本：先让护理、记录、对比和 HOA 报告稳定可用。</p>
+      </div>
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="手机快捷导航">
-    <button class="bottom-nav__btn active" data-nav="home" type="button">🏠<span>首页</span></button>
-    <button class="bottom-nav__btn" data-nav="today" type="button">✅<span>今日</span></button>
-    <button class="bottom-nav__btn" data-nav="guide" type="button">🔍<span>查问题</span></button>
-    <button class="bottom-nav__btn" data-nav="log" type="button">📸<span>记录</span></button>
-  </nav>
-
+  <nav class="bottom" id="bottomNav" aria-label="Mobile navigation"></nav>
   <script src="js/app.js" defer></script>
 </body>
 </html>
