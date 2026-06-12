@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百慕大草坪护理完整计划</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --accent: #f4a261;
+    --accent-light: #fef3e2;
+    --white: #ffffff;
+    --gray-light: #f8f9fa;
+    --gray-mid: #e9ecef;
+    --text-dark: #1a1a2e;
+    --text-mid: #495057;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; background:#f0f7f2; color:var(--text-dark); line-height:1.7; }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg,var(--green-dark) 0%,var(--green-mid) 60%,var(--green-light) 100%); color:white; padding:48px 24px 40px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:'🌿'; font-size:120px; position:absolute; top:-20px; right:-20px; opacity:0.12; transform:rotate(20deg); }
+  .hero h1 { font-size:1.8rem; font-weight:700; letter-spacing:0.05em; margin-bottom:6px; }
+  .hero p { font-size:0.95rem; opacity:0.85; font-weight:300; }
+  .hero .badge { display:inline-block; margin-top:14px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); border-radius:100px; padding:5px 16px; font-size:0.8rem; font-weight:500; }
+
+  /* TABS */
+  .tabs { display:flex; overflow-x:auto; background:var(--white); box-shadow:0 2px 8px rgba(0,0,0,0.06); position:sticky; top:0; z-index:100; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar { display:none; }
+  .tab-btn { flex:0 0 auto; padding:13px 16px; border:none; background:none; font-family:inherit; font-size:0.82rem; font-weight:500; color:var(--text-mid); cursor:pointer; border-bottom:3px solid transparent; transition:all 0.2s; white-space:nowrap; }
+  .tab-btn.active { color:var(--green-mid); border-bottom-color:var(--green-mid); }
+  .tab-btn:hover { background:var(--gray-light); }
+
+  /* PANELS */
+  .panel { display:none; padding:24px 16px 60px; max-width:800px; margin:0 auto; }
+  .panel.active { display:block; }
+
+  /* SECTION TITLE */
+  .section-title { font-size:1.1rem; font-weight:700; color:var(--green-dark); margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
+  .section-title:first-child { margin-top:0; }
+
+  /* CARDS */
+  .card { background:var(--white); border-radius:var(--radius); padding:18px; margin-bottom:12px; box-shadow:var(--shadow); border-left:4px solid var(--green-light); }
+  .card.warning-card { border-left-color:#e76f51; background:#fff8f6; }
+  .card.tip-card { border-left-color:#457b9d; background:#f0f6fb; }
+  .card h3 { font-size:0.97rem; font-weight:700; color:var(--green-dark); margin-bottom:7px; }
+  .card p,.card li { font-size:0.9rem; color:var(--text-mid); line-height:1.75; }
+  .card ul { padding-left:18px; }
+  .card li { margin-bottom:4px; }
+
+  /* MONTH */
+  .month-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+  .month-card { background:var(--white); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+  .month-header { display:flex; align-items:center; gap:10px; padding:13px 16px; font-weight:700; font-size:0.97rem; color:white; }
+  .month-body { padding:14px 16px; }
+  .month-body ul { padding-left:0; list-style:none; }
+  .month-body li { font-size:0.88rem; color:var(--text-mid); padding:5px 0; border-bottom:1px solid var(--gray-mid); display:flex; align-items:flex-start; gap:8px; }
+  .month-body li:last-child { border-bottom:none; }
+  .month-body li::before { content:'✅'; font-size:0.82rem; flex-shrink:0; margin-top:2px; }
+  .month-body li.warn::before { content:'⚠️'; }
+  .month-body li.stop::before { content:'🚫'; }
+  .m-jun{background:linear-gradient(90deg,#2d6a4f,#52b788);}
+  .m-jul{background:linear-gradient(90deg,#1a6b3a,#40916c);}
+  .m-aug{background:linear-gradient(90deg,#e76f51,#f4a261);}
+  .m-sep{background:linear-gradient(90deg,#a57c52,#c9a87c);}
+  .m-oct{background:linear-gradient(90deg,#6b4c11,#a67c52);}
+  .m-dec{background:linear-gradient(90deg,#457b9d,#74b3ce);}
+  .m-mar{background:linear-gradient(90deg,#2d6a4f,#95d5b2);}
+
+  /* PURCHASE */
+  .buy-section { margin-bottom:22px; }
+  .buy-section h3 { font-size:0.97rem; font-weight:700; color:var(--green-dark); margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid var(--green-pale); }
+  .buy-item { background:var(--white); border-radius:12px; padding:12px 14px; margin-bottom:9px; box-shadow:var(--shadow); display:grid; grid-template-columns:1fr auto; gap:8px; align-items:start; }
+  .buy-item .product-name { font-weight:700; font-size:0.9rem; color:var(--text-dark); margin-bottom:2px; }
+  .buy-item .product-desc { font-size:0.8rem; color:var(--text-mid); }
+  .buy-tag { font-size:0.72rem; font-weight:600; padding:4px 9px; border-radius:100px; white-space:nowrap; }
+  .tag-costco{background:#e8f4f8;color:#1565c0;}
+  .tag-amazon{background:#fff3e0;color:#e65100;}
+  .tag-sams{background:#e8f5e9;color:#2e7d32;}
+  .tag-hd{background:#fce4ec;color:#c62828;}
+  .tag-any{background:var(--gray-mid);color:var(--text-mid);}
+
+  /* FOCUS GRID */
+  .focus-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+  @media(max-width:480px){.focus-grid{grid-template-columns:1fr;}}
+  .focus-card { background:var(--white); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); text-align:center; }
+  .focus-card .icon { font-size:1.8rem; margin-bottom:7px; }
+  .focus-card .title { font-weight:700; font-size:0.92rem; color:var(--green-dark); margin-bottom:5px; }
+  .focus-card .desc { font-size:0.8rem; color:var(--text-mid); }
+
+  /* FAQ */
+  .faq-item { background:var(--white); border-radius:var(--radius); margin-bottom:10px; box-shadow:var(--shadow); overflow:hidden; }
+  .faq-q { padding:14px 16px; font-weight:700; font-size:0.9rem; color:var(--green-dark); cursor:pointer; display:flex; justify-content:space-between; align-items:center; user-select:none; }
+  .faq-q:hover { background:var(--green-pale); }
+  .faq-arrow { transition:transform 0.25s; font-size:0.78rem; }
+  .faq-a { display:none; padding:14px 16px; font-size:0.86rem; color:var(--text-mid); line-height:1.8; border-top:1px solid var(--gray-mid); }
+  .faq-item.open .faq-a { display:block; }
+  .faq-item.open .faq-arrow { transform:rotate(180deg); }
+
+  /* HIGHLIGHT */
+  .highlight { background:var(--accent-light); border:1px solid #f4a261; border-radius:12px; padding:14px 16px; font-size:0.86rem; color:#7a4419; margin-bottom:14px; line-height:1.75; }
+  .highlight strong { color:#5a3010; }
+
+  /* ===== AI WEED ID ===== */
+  .ai-upload-area { border:2px dashed var(--green-light); border-radius:var(--radius); padding:32px 20px; text-align:center; background:var(--white); cursor:pointer; transition:all 0.2s; margin-bottom:16px; }
+  .ai-upload-area:hover { border-color:var(--green-mid); background:var(--green-pale); }
+  .ai-upload-area .upload-icon { font-size:3rem; margin-bottom:10px; }
+  .ai-upload-area .upload-text { font-size:0.95rem; font-weight:600; color:var(--green-dark); margin-bottom:4px; }
+  .ai-upload-area .upload-sub { font-size:0.82rem; color:var(--text-mid); }
+  #weedFileInput { display:none; }
+  .preview-img { width:100%; max-height:260px; object-fit:cover; border-radius:12px; margin-bottom:14px; display:none; }
+  .ai-result-box { background:var(--white); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); display:none; }
+  .ai-result-box .result-title { font-size:1rem; font-weight:700; color:var(--green-dark); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+  .ai-result-content { font-size:0.88rem; color:var(--text-mid); line-height:1.85; white-space:pre-wrap; }
+  .ai-loading { display:none; text-align:center; padding:24px; }
+  .ai-loading .spinner { width:36px; height:36px; border:4px solid var(--green-pale); border-top-color:var(--green-mid); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 10px; }
+  @keyframes spin { to{transform:rotate(360deg);} }
+  .analyze-btn { width:100%; padding:14px; background:var(--green-mid); color:white; border:none; border-radius:12px; font-family:inherit; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s; margin-bottom:12px; display:none; }
+  .analyze-btn:hover { background:var(--green-dark); }
+  .analyze-btn:disabled { background:#aaa; cursor:not-allowed; }
+
+  /* ===== AI TIPS CHAT ===== */
+  .chat-container { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; height:420px; }
+  .chat-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
+  .chat-bubble { max-width:85%; padding:10px 14px; border-radius:14px; font-size:0.88rem; line-height:1.7; }
+  .chat-bubble.bot { background:var(--green-pale); color:var(--green-dark); align-self:flex-start; border-bottom-left-radius:4px; }
+  .chat-bubble.user { background:var(--green-mid); color:white; align-self:flex-end; border-bottom-right-radius:4px; }
+  .chat-bubble.loading { background:var(--gray-mid); }
+  .chat-input-row { display:flex; gap:8px; padding:12px; border-top:1px solid var(--gray-mid); background:#fafafa; }
+  .chat-input { flex:1; border:1px solid var(--gray-mid); border-radius:10px; padding:10px 12px; font-family:inherit; font-size:0.88rem; outline:none; resize:none; }
+  .chat-input:focus { border-color:var(--green-light); }
+  .chat-send { background:var(--green-mid); color:white; border:none; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:1.1rem; transition:background 0.2s; }
+  .chat-send:hover { background:var(--green-dark); }
+  .quick-btns { display:flex; gap:6px; flex-wrap:wrap; padding:8px 12px 0; }
+  .quick-btn { background:var(--green-pale); color:var(--green-dark); border:1px solid var(--green-light); border-radius:100px; padding:5px 12px; font-size:0.78rem; font-family:inherit; cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+  .quick-btn:hover { background:var(--green-light); color:white; }
+
+  /* ===== PROGRESS LOG ===== */
+  .log-form { background:var(--white); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:18px; }
+  .log-form h3 { font-size:1rem; font-weight:700; color:var(--green-dark); margin-bottom:14px; }
+  .form-row { margin-bottom:12px; }
+  .form-row label { display:block; font-size:0.82rem; font-weight:600; color:var(--text-mid); margin-bottom:5px; }
+  .form-row input, .form-row select, .form-row textarea { width:100%; border:1px solid var(--gray-mid); border-radius:10px; padding:9px 12px; font-family:inherit; font-size:0.88rem; outline:none; }
+  .form-row input:focus,.form-row select:focus,.form-row textarea:focus { border-color:var(--green-light); }
+  .form-row textarea { resize:vertical; min-height:70px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
+  .rating-row { display:flex; gap:8px; }
+  .rating-btn { flex:1; padding:8px; border:2px solid var(--gray-mid); border-radius:10px; background:none; font-family:inherit; font-size:0.85rem; cursor:pointer; transition:all 0.15s; text-align:center; }
+  .rating-btn.selected { border-color:var(--green-mid); background:var(--green-pale); font-weight:700; color:var(--green-dark); }
+  .log-submit-btn { width:100%; padding:13px; background:var(--green-mid); color:white; border:none; border-radius:12px; font-family:inherit; font-size:0.95rem; font-weight:700; cursor:pointer; transition:background 0.2s; margin-top:6px; }
+  .log-submit-btn:hover { background:var(--green-dark); }
+
+  /* LOG ENTRIES */
+  .log-filters { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
+  .filter-btn { background:var(--white); border:1px solid var(--gray-mid); border-radius:100px; padding:5px 12px; font-size:0.78rem; font-family:inherit; cursor:pointer; transition:all 0.15s; }
+  .filter-btn.active { background:var(--green-mid); color:white; border-color:var(--green-mid); }
+  .log-entry { background:var(--white); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:var(--shadow); position:relative; }
+  .log-entry-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; flex-wrap:wrap; gap:6px; }
+  .log-entry-date { font-size:0.78rem; color:var(--text-mid); }
+  .log-entry-type { font-size:0.75rem; font-weight:600; padding:3px 10px; border-radius:100px; }
+  .type-fertilize{background:#e8f5e9;color:#2e7d32;}
+  .type-mow{background:#e3f2fd;color:#1565c0;}
+  .type-weed{background:#fce4ec;color:#c62828;}
+  .type-water{background:#e0f7fa;color:#00695c;}
+  .type-disease{background:#fff3e0;color:#e65100;}
+  .type-general{background:#f3e5f5;color:#6a1b9a;}
+  .type-photo{background:#e8eaf6;color:#283593;}
+  .log-entry-title { font-weight:700; font-size:0.92rem; color:var(--text-dark); margin-bottom:5px; }
+  .log-entry-notes { font-size:0.85rem; color:var(--text-mid); line-height:1.65; }
+  .log-entry-rating { font-size:0.82rem; margin-top:6px; }
+  .log-entry-img { width:100%; max-height:180px; object-fit:cover; border-radius:10px; margin-top:10px; }
+  .log-delete-btn { position:absolute; top:12px; right:12px; background:none; border:none; font-size:1.1rem; cursor:pointer; color:#ccc; transition:color 0.15s; }
+  .log-delete-btn:hover { color:#e76f51; }
+  .no-logs { text-align:center; padding:40px 20px; color:var(--text-mid); font-size:0.9rem; }
+
+  /* HOA EXPORT */
+  .export-section { background:var(--white); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:16px; }
+  .export-section h3 { font-size:1rem; font-weight:700; color:var(--green-dark); margin-bottom:10px; }
+  .export-btn { display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; border:none; font-family:inherit; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s; margin-right:8px; margin-bottom:8px; }
+  .export-btn.primary { background:var(--green-mid); color:white; }
+  .export-btn.primary:hover { background:var(--green-dark); }
+  .export-btn.secondary { background:var(--gray-light); color:var(--text-dark); border:1px solid var(--gray-mid); }
+  .export-btn.secondary:hover { background:var(--gray-mid); }
+  .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
+  @media(max-width:400px){.stats-grid{grid-template-columns:1fr 1fr;}}
+  .stat-box { background:var(--green-pale); border-radius:12px; padding:12px; text-align:center; }
+  .stat-num { font-size:1.5rem; font-weight:700; color:var(--green-dark); }
+  .stat-label { font-size:0.75rem; color:var(--green-mid); margin-top:2px; }
+
+
+  /* ===== AI ENHANCEMENTS ===== */
+  .ai-note { background:#fffbea; border:1px solid #f4d35e; border-radius:12px; padding:12px 14px; font-size:0.82rem; color:#6b5500; margin-bottom:12px; line-height:1.65; }
+  .ai-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .mini-btn { border:none; border-radius:10px; padding:9px 12px; font-family:inherit; font-size:0.84rem; font-weight:700; cursor:pointer; }
+  .mini-btn.primary { background:var(--green-mid); color:white; }
+  .mini-btn.secondary { background:var(--gray-light); color:var(--text-dark); border:1px solid var(--gray-mid); }
+  .ai-confidence { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 12px; }
+  .confidence-pill { background:var(--green-pale); color:var(--green-dark); border-radius:100px; padding:5px 10px; font-size:0.78rem; font-weight:700; }
+  .ai-provider-row { background:var(--white); border-radius:12px; padding:12px 14px; box-shadow:var(--shadow); margin-bottom:12px; }
+  .ai-provider-row code { background:var(--gray-light); padding:2px 6px; border-radius:6px; font-size:0.78rem; }
+  .summary-box { background:#f8fff9; border:1px solid var(--green-pale); border-radius:12px; padding:12px 14px; margin-bottom:14px; font-size:0.85rem; color:var(--text-mid); line-height:1.7; }
+
+  /* PHOTO LOG preview */
+  .photo-preview-log { width:60px; height:60px; object-fit:cover; border-radius:8px; border:2px solid var(--gray-mid); margin-top:4px; }
+
+
+  /* ===== SENIOR-FRIENDLY UX ENHANCEMENTS ===== */
+  body.large-text { font-size: 112%; }
+  .skip-link { position:absolute; left:-999px; top:8px; background:#fff; color:#1a3a2a; padding:10px 14px; border-radius:8px; z-index:999; }
+  .skip-link:focus { left:12px; }
+  .home-guide { max-width:900px; margin:-18px auto 0; padding:0 16px 10px; position:relative; z-index:5; }
+  .guide-card { background:var(--white); border-radius:20px; box-shadow:var(--shadow); padding:18px; margin-bottom:14px; border:1px solid rgba(45,106,79,.08); }
+  .guide-card h2 { font-size:1.15rem; color:var(--green-dark); margin-bottom:8px; }
+  .guide-card p { font-size:.94rem; color:var(--text-mid); }
+  .primary-actions { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
+  @media(max-width:720px){ .primary-actions{grid-template-columns:1fr 1fr;} }
+  @media(max-width:430px){ .primary-actions{grid-template-columns:1fr;} }
+  .action-card { border:2px solid var(--green-pale); border-radius:16px; background:#fff; padding:16px 12px; text-align:left; cursor:pointer; min-height:112px; transition:.18s; font-family:inherit; }
+  .action-card:hover, .action-card:focus { border-color:var(--green-mid); transform:translateY(-1px); outline:none; }
+  .action-card .big-icon { font-size:2rem; display:block; margin-bottom:6px; }
+  .action-card strong { display:block; color:var(--green-dark); font-size:1rem; margin-bottom:3px; }
+  .action-card span { display:block; color:var(--text-mid); font-size:.82rem; line-height:1.45; }
+  .ux-toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .ux-btn { min-height:44px; padding:10px 14px; border-radius:12px; border:1px solid var(--gray-mid); background:#fff; font-family:inherit; font-weight:700; color:var(--green-dark); cursor:pointer; }
+  .ux-btn:hover { background:var(--green-pale); }
+  .guided-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+  @media(max-width:650px){ .guided-steps{grid-template-columns:1fr;} }
+  .step-pill { background:#f8f9fa; border-radius:14px; padding:12px; border-left:4px solid var(--green-light); }
+  .step-pill b { color:var(--green-dark); display:block; margin-bottom:3px; }
+  .step-pill small { color:var(--text-mid); line-height:1.4; display:block; }
+  .trust-note { background:#fff8e8; border:1px solid #f4a261; border-radius:14px; padding:12px 14px; margin-top:12px; color:#6d421b; font-size:.88rem; }
+  .tabs { top:0; }
+  .tab-btn { min-height:48px; font-size:.9rem; }
+  button, input, select, textarea { font-size:16px; }
+  .bottom-nav { position:fixed; left:0; right:0; bottom:0; background:#fff; box-shadow:0 -4px 18px rgba(0,0,0,.12); display:none; grid-template-columns:repeat(4,1fr); z-index:200; padding:6px 4px max(6px, env(safe-area-inset-bottom)); }
+  .bottom-nav button { border:0; background:#fff; color:var(--text-mid); font-family:inherit; font-size:.72rem; padding:7px 2px; border-radius:10px; min-height:52px; }
+  .bottom-nav button span { display:block; font-size:1.35rem; line-height:1; margin-bottom:3px; }
+  .bottom-nav button.active { background:var(--green-pale); color:var(--green-dark); font-weight:700; }
+  @media(max-width:640px){ body{padding-bottom:72px;} .bottom-nav{display:grid;} .tabs{display:none;} .hero{padding-bottom:34px;} }
+  .help-text { font-size:.82rem; color:var(--text-mid); background:#f7fbf8; border-radius:10px; padding:8px 10px; margin-top:6px; }
+  .log-form .form-row label::after { content:' '; }
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#monthly">跳到主要内容</a>
+
+<div class="hero">
+  <h1>🌿 百慕大草坪护理手册</h1>
+  <p>Georgia州 · AI智能识草 · 完整护理计划 · HOA记录</p>
+  <div class="badge">📍 Smyrna, GA 30080</div>
+</div>
+
+<section class="home-guide" aria-label="使用指南">
+  <div class="guide-card">
+    <h2>先做什么？按这4个大按钮走就可以</h2>
+    <p>这个版本为不太熟悉科技产品的家庭用户优化：字更大、按钮更大、步骤更清楚，并把最常用的功能放在首页。</p>
+    <div class="primary-actions">
+      <button class="action-card" onclick="switchTabById('weedai')"><span class="big-icon">📷</span><strong>拍照识别杂草</strong><span>拍一张草坪照片，查看可能的杂草和处理建议</span></button>
+      <button class="action-card" onclick="switchTabById('log')"><span class="big-icon">➕</span><strong>记录今天做了什么</strong><span>施肥、割草、浇水、除草都能保存</span></button>
+      <button class="action-card" onclick="switchTabById('monthly')"><span class="big-icon">📅</span><strong>查看本月任务</strong><span>不知道下一步？看月度计划即可</span></button>
+      <button class="action-card" onclick="switchTabById('tips')"><span class="big-icon">💬</span><strong>问护理助手</strong><span>用中文问：黄斑怎么办、多久浇水等</span></button>
+    </div>
+    <div class="guided-steps">
+      <div class="step-pill"><b>1. 拍照</b><small>先记录问题区域，便于前后对比。</small></div>
+      <div class="step-pill"><b>2. 处理</b><small>按建议施肥、除草、浇水或杀菌。</small></div>
+      <div class="step-pill"><b>3. 存证</b><small>保存日期、产品、备注和照片，HOA询问时可导出。</small></div>
+    </div>
+    <div class="ux-toolbar">
+      <button class="ux-btn" onclick="toggleLargeText()">🔎 放大/恢复文字</button>
+      <button class="ux-btn" onclick="switchTabById('log')">📤 导出HOA记录</button>
+      <button class="ux-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️ 回到顶部</button>
+    </div>
+    <div class="trust-note">安全提示：照片AI识别适合作为参考。真正接入AI时，请通过后端代理保存API密钥，不要把密钥写在HTML里。</div>
+  </div>
+</section>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('monthly',this)">📅 月度计划</button>
+  <button class="tab-btn" onclick="switchTab('purchase',this)">🛒 购买指南</button>
+  <button class="tab-btn" onclick="switchTab('weedai',this)">🔍 AI识草</button>
+  <button class="tab-btn" onclick="switchTab('tips',this)">💬 护理助手</button>
+  <button class="tab-btn" onclick="switchTab('focus',this)">🎯 重点提醒</button>
+  <button class="tab-btn" onclick="switchTab('log',this)">📋 护理日志</button>
+  <button class="tab-btn" onclick="switchTab('faq',this)">❓ 常见问题</button>
+</div>
+
+<!-- ===== MONTHLY ===== -->
+<div id="monthly" class="panel active">
+  <div class="highlight">⏰ <strong>现在是六月</strong>——正是百慕大草坪最旺盛的生长季！施肥、除草、保持割草高度是本月三大重点。</div>
+  <div class="month-grid">
+    <div class="month-card">
+      <div class="month-header m-jun"><span>🌱</span><span>六月（现在）——打基础</span></div>
+      <div class="month-body"><ul>
+        <li>去Costco / Home Depot采购所有产品（见购买指南）</li>
+        <li>做土壤检测，确认pH在6.0–6.5之间</li>
+        <li>施第一次氮肥（Scotts Turf Builder百慕大专用）</li>
+        <li>开始喷Virginia Buttonweed除草剂（Celsius WG 或 Ortho Weed B Gon Max）</li>
+        <li>割草保持1到1.5英寸，每5–7天割一次</li>
+        <li>每周浇水1英寸，早上浇，不要傍晚浇</li>
+        <li>设置洒水计时器自动浇水</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-jul"><span>☀️</span><span>七月——保持势头</span></div>
+      <div class="month-body"><ul>
+        <li>施第二次氮肥</li>
+        <li>每隔2–3周喷一次Virginia Buttonweed除草剂</li>
+        <li>观察草坪有无圆形黄斑（霉菌信号）</li>
+        <li class="warn">发现黄斑立即用Scotts DiseaseEx处理</li>
+        <li>继续早上浇水，天热要浇透</li>
+        <li>每5–7天割一次草，保持高度</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-aug"><span>🌡️</span><span>八月——维护 + 防霉</span></div>
+      <div class="month-body"><ul>
+        <li>施第三次氮肥</li>
+        <li>继续喷Virginia Buttonweed除草剂——本月效果应很明显</li>
+        <li class="warn">八月湿热，霉菌风险最高，密切观察草坪颜色</li>
+        <li>草坪茂密的话可适当减少浇水频率</li>
+        <li>继续保持割草高度1–1.5英寸</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-sep"><span>🍂</span><span>九月——收尾施肥</span></div>
+      <div class="month-body"><ul>
+        <li>最后一次施肥——换低氮高钾肥（如0-0-60），帮助过冬</li>
+        <li>减少割草频率，草开始减缓生长</li>
+        <li>浇水量慢慢减少</li>
+        <li class="stop">九月后不再施氮肥，否则影响冬季休眠</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-oct"><span>🍁</span><span>十月至十一月——准备休眠</span></div>
+      <div class="month-body"><ul>
+        <li>撒秋季预防除草剂（pre-emergent），防冬季杂草萌发</li>
+        <li>草开始变黄变棕——完全正常，不用担心</li>
+        <li>最后割一次草，高度可留约2英寸</li>
+        <li class="stop">停止施肥，减少浇水</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-dec"><span>❄️</span><span>十二月至二月——休眠期</span></div>
+      <div class="month-body"><ul>
+        <li>草是棕色的，完全正常</li>
+        <li class="stop">不浇水，不施肥，不割草</li>
+        <li>好好休息！😄</li>
+      </ul></div>
+    </div>
+    <div class="month-card">
+      <div class="month-header m-mar"><span>🌸</span><span>三月——新一年开始</span></div>
+      <div class="month-body"><ul>
+        <li>土壤温度达55°F以上时撒春季预防除草剂（Scotts Halts）</li>
+        <li>等草返青变绿后再开始割草</li>
+        <li>五月草完全绿了之后开始第一次施氮肥</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PURCHASE ===== -->
+<div id="purchase" class="panel">
+  <div class="highlight">💡 <strong>省钱策略：</strong>大包装肥料去 Costco / Sam's Club；除草剂和杀菌剂在 Amazon 买多包装；Celsius WG只能在Amazon买，实体店基本没货。</div>
+  <div class="buy-section">
+    <h3>🌿 肥料</h3>
+    <div class="buy-item"><div><div class="product-name">Scotts Turf Builder 百慕大专用肥料（40磅装）</div><div class="product-desc">覆盖14,000平方尺 · Costco约$45–46，比Home Depot便宜</div></div><span class="buy-tag tag-costco">Costco 优先</span></div>
+    <div class="buy-item"><div><div class="product-name">低氮高钾肥料（0-0-60）</div><div class="product-desc">九月份用，帮助草坪准备过冬</div></div><span class="buy-tag tag-hd">Home Depot</span></div>
+  </div>
+  <div class="buy-section">
+    <h3>🌱 除草剂</h3>
+    <div class="buy-item"><div><div class="product-name">Celsius WG（弗吉尼亚纽扣草专用）</div><div class="product-desc">⚠️ 实体店基本买不到，必须在Amazon下单</div></div><span class="buy-tag tag-amazon">Amazon 唯一</span></div>
+    <div class="buy-item"><div><div class="product-name">Ortho Weed B Gon Max（多包装）</div><div class="product-desc">通用阔叶杂草除草剂，百慕大草坪安全使用</div></div><span class="buy-tag tag-amazon">Amazon 多包装</span></div>
+    <div class="buy-item"><div><div class="product-name">Scotts Halts（预防除草剂）</div><div class="product-desc">春季三月用，提前防马唐草</div></div><span class="buy-tag tag-costco">Costco / Sam's</span></div>
+  </div>
+  <div class="buy-section">
+    <h3>🍄 杀菌剂</h3>
+    <div class="buy-item"><div><div class="product-name">Scotts DiseaseEx（2包装）</div><div class="product-desc">防霉菌，2包覆盖10,000平方尺 · Amazon双包更划算</div></div><span class="buy-tag tag-amazon">Amazon 双包装</span></div>
+  </div>
+  <div class="buy-section">
+    <h3>🪨 土壤改良</h3>
+    <div class="buy-item"><div><div class="product-name">土壤检测包（pH测试）</div><div class="product-desc">确认pH是否在6.0–6.5之间，只需买一次</div></div><span class="buy-tag tag-hd">Home Depot</span></div>
+    <div class="buy-item"><div><div class="product-name">石灰粉（如需调节pH）</div><div class="product-desc">Georgia红土偏酸，可能需要加石灰粉</div></div><span class="buy-tag tag-any">Home Depot / Lowe's</span></div>
+  </div>
+  <div class="buy-section">
+    <h3>🛠️ 工具</h3>
+    <div class="buy-item"><div><div class="product-name">撒肥器（Broadcast Spreader）</div><div class="product-desc">Costco季节性有售约$40，比Home Depot便宜</div></div><span class="buy-tag tag-costco">Costco 季节性</span></div>
+    <div class="buy-item"><div><div class="product-name">洒水计时器</div><div class="product-desc">Orbit或Rain Bird，Costco / Sam's有多件套装</div></div><span class="buy-tag tag-costco">Costco / Sam's</span></div>
+    <div class="buy-item"><div><div class="product-name">割草机（调至1–1.5英寸档）</div><div class="product-desc">Sam's Club 有性价比高的选项</div></div><span class="buy-tag tag-sams">Sam's Club</span></div>
+  </div>
+  <div class="card tip-card">
+    <h3>📍 附近实体店</h3>
+    <ul>
+      <li><strong>Home Depot</strong>（Cumberland Pkwy）— 最近，开门最早，全品类</li>
+      <li><strong>Lowe's</strong>（Austell Rd）— 备选，价格差不多</li>
+      <li><strong>Frank A. Smith Nurseries</strong>（Marietta）— 买草皮首选，评分4.8 ⭐</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== AI WEED ID ===== -->
+<div id="weedai" class="panel">
+  <div class="section-title">🔍 AI智能识别杂草</div>
+  <div class="highlight">📸 <strong>拍一张照片</strong>，AI会识别可能的杂草、危险程度、推荐产品和处理步骤。支持手机直接拍照上传。</div>
+  <div class="ai-note">🔐 前端不会放API Key。这个示例会先尝试调用 <code>/api/analyze-weed</code> 后端接口；如果没有后端，会自动显示本地Demo分析，方便你继续学习 Vibe Coding 和原型演示。</div>
+  <div class="ai-provider-row">
+    <strong>建议后端接口：</strong><code>POST /api/analyze-weed</code><br>
+    <span style="font-size:0.82rem;color:var(--text-mid)">Body: { imageBase64, lawnType, location } · Response: { weedName, confidence, risk, products, steps, tips }</span>
+  </div>
+
+  <input type="file" id="weedFileInput" accept="image/*" capture="environment">
+  <img id="weedPreview" class="preview-img" alt="预览">
+
+  <div class="ai-upload-area" id="uploadArea" onclick="document.getElementById('weedFileInput').click()">
+    <div class="upload-icon">📷</div>
+    <div class="upload-text">点击拍照或上传图片</div>
+    <div class="upload-sub">支持 JPG、PNG · 手机可直接拍照</div>
+  </div>
+
+  <button class="analyze-btn" id="analyzeBtn" onclick="analyzeWeed()">🔍 开始识别杂草</button>
+
+  <div class="ai-loading" id="weedLoading">
+    <div class="spinner"></div>
+    <div style="font-size:0.88rem;color:var(--text-mid)">AI正在分析图片，请稍候…</div>
+  </div>
+
+  <div class="ai-result-box" id="weedResult">
+    <div class="result-title">🌿 AI分析结果</div>
+    <div class="ai-confidence" id="weedConfidence"></div>
+    <div class="ai-result-content" id="weedResultContent"></div>
+    <div class="ai-actions">
+      <button class="mini-btn primary" onclick="saveWeedResultToLog()">📋 保存到护理日志</button>
+      <button class="mini-btn secondary" onclick="resetWeedAnalyzer()">🔄 重新拍照</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TIPS CHAT ===== -->
+<div id="tips" class="panel">
+  <div class="section-title">💬 草坪护理AI助手</div>
+  <div class="highlight">🤖 有任何草坪问题，直接用<strong>中文</strong>问我！我会根据Georgia百慕大草坪的具体情况给你建议。</div>
+
+  <div class="quick-btns" id="quickBtns">
+    <button class="quick-btn" onclick="sendQuick('草坪出现黄斑怎么办？')">黄斑问题</button>
+    <button class="quick-btn" onclick="sendQuick('现在六月份应该重点做什么？')">六月重点</button>
+    <button class="quick-btn" onclick="sendQuick('纽扣草怎么除？')">纽扣草</button>
+    <button class="quick-btn" onclick="sendQuick('浇水频率和水量怎么控制？')">浇水方法</button>
+    <button class="quick-btn" onclick="sendQuick('施肥应该选什么产品？')">施肥建议</button>
+    <button class="quick-btn" onclick="sendQuick('草坪割草高度和频率？')">割草标准</button>
+  </div>
+
+  <div style="margin-top:10px;">
+    <div class="chat-container">
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-bubble bot">你好！👋 我是你的草坪护理助手。你可以问我任何关于百慕大草坪的问题，比如除草、施肥、浇水、霉菌处理等。也可以点击上面的快速问题按钮。</div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chatInput" placeholder="输入你的问题…" rows="1" onkeydown="chatKeydown(event)"></textarea>
+        <button class="chat-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOCUS ===== -->
+<div id="focus" class="panel">
+  <div class="section-title">🎯 六月当下最重要的四件事</div>
+  <div class="focus-grid">
+    <div class="focus-card"><div class="icon">💊</div><div class="title">马上施肥</div><div class="desc">六月是施氮肥的黄金时机，草坪正在猛长，现在施效果最好</div></div>
+    <div class="focus-card"><div class="icon">✂️</div><div class="title">勤割草</div><div class="desc">每5–7天割一次，保持1–1.5英寸，不要让草长太高</div></div>
+    <div class="focus-card"><div class="icon">🌊</div><div class="title">正确浇水</div><div class="desc">每周1英寸，早上浇，深浇不频繁，傍晚浇容易生霉菌</div></div>
+    <div class="focus-card"><div class="icon">🧴</div><div class="title">对付纽扣草</div><div class="desc">马上订购Celsius WG，整个夏天持续每2–3周喷一次</div></div>
+  </div>
+  <div class="section-title">🚫 最常见的错误</div>
+  <div class="card warning-card"><h3>❌ 傍晚浇水</h3><p>Georgia夏天湿热，傍晚浇水极容易引发霉菌。请务必早上6–9点浇水。</p></div>
+  <div class="card warning-card"><h3>❌ 割草太高</h3><p>百慕大草超过2英寸会形成厚枯草层，草反而越来越弱。</p></div>
+  <div class="card warning-card"><h3>❌ 手拔纽扣草</h3><p>手拔断根反而刺激它长得更快。必须用除草剂。</p></div>
+  <div class="card warning-card"><h3>❌ 秋天还在施氮肥</h3><p>九月以后停止施氮肥，否则影响冬季休眠，让草受冻害。</p></div>
+  <div class="card warning-card"><h3>❌ 冬天草变棕就以为草死了</h3><p>百慕大草冬天休眠变棕完全正常，春天自己返青。</p></div>
+  <div class="section-title">✅ 判断草坪健康的方法</div>
+  <div class="card"><ul>
+    <li>颜色均匀深绿 = 健康 👍</li>
+    <li>圆形黄/棕斑块 = 可能有霉菌，用DiseaseEx</li>
+    <li>草色发黄但非斑块 = 可能缺氮，考虑施肥</li>
+    <li>草稀疏、裸土明显 = 需要补草皮或补种</li>
+    <li>爬地杂草扩散 = 纽扣草，继续喷除草剂</li>
+  </ul></div>
+</div>
+
+<!-- ===== LOG ===== -->
+<div id="log" class="panel">
+  <div class="section-title">📊 护理统计</div>
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">总记录</div></div>
+    <div class="stat-box"><div class="stat-num" id="statDays">0</div><div class="stat-label">护理天数</div></div>
+    <div class="stat-box"><div class="stat-num" id="statPhotos">0</div><div class="stat-label">照片记录</div></div>
+  </div>
+
+  <div class="export-section">
+    <h3>📤 分享给HOA</h3>
+    <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:12px;">导出完整护理记录报告，包含日期、操作内容和照片，可直接提交给HOA。</p>
+    <button class="export-btn primary" onclick="exportHOA()">📄 导出HOA报告（打印版）</button>
+    <button class="export-btn secondary" onclick="exportCSV()">📊 导出CSV数据表</button>
+    <button class="export-btn secondary" onclick="exportJSON()">🧾 备份JSON</button>
+  </div>
+
+  <div class="summary-box" id="hoaSummary">还没有记录。添加护理记录后，这里会自动生成给HOA看的维护摘要。</div>
+
+  <div class="log-form">
+    <h3>➕ 添加护理记录</h3><div class="help-text">只填两个必填项也可以：日期 + 具体操作。照片和评分是可选的，但对HOA证明更有帮助。</div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>日期</label>
+        <input type="date" id="logDate">
+      </div>
+      <div class="form-row">
+        <label>护理类型</label>
+        <select id="logType">
+          <option value="fertilize">🌿 施肥</option>
+          <option value="mow">✂️ 割草</option>
+          <option value="weed">🌱 除草</option>
+          <option value="water">💧 浇水/调整</option>
+          <option value="disease">🍄 病害处理</option>
+          <option value="photo">📸 草坪拍照记录</option>
+          <option value="general">📝 其他</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>具体操作 / 使用产品</label>
+      <input type="text" id="logTitle" placeholder="例如：施Scotts Turf Builder，撒肥器设置3档">
+    </div>
+    <div class="form-row">
+      <label>备注（天气、效果、观察等）</label>
+      <textarea id="logNotes" placeholder="例如：今天晴，草坪颜色很绿，没发现新杂草…"></textarea>
+    </div>
+    <div class="form-row">
+      <label>草坪状况评分</label>
+      <div class="rating-row">
+        <button class="rating-btn" onclick="setRating(1,this)">😟 差</button>
+        <button class="rating-btn" onclick="setRating(2,this)">😐 一般</button>
+        <button class="rating-btn" onclick="setRating(3,this)">🙂 还好</button>
+        <button class="rating-btn" onclick="setRating(4,this)">😊 良好</button>
+        <button class="rating-btn" onclick="setRating(5,this)">🌟 很棒</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>附上照片（可选）</label>
+      <input type="file" id="logPhoto" accept="image/*" capture="environment" onchange="previewLogPhoto(this)">
+      <img id="logPhotoPreview" class="photo-preview-log" style="display:none">
+    </div>
+    <button class="log-submit-btn" onclick="addLogEntry()">✅ 保存记录</button>
+  </div>
+
+  <div class="section-title">📋 护理历史记录</div>
+  <div class="log-filters">
+    <span style="font-size:0.8rem;color:var(--text-mid);">筛选：</span>
+    <button class="filter-btn active" onclick="filterLog('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterLog('fertilize',this)">施肥</button>
+    <button class="filter-btn" onclick="filterLog('mow',this)">割草</button>
+    <button class="filter-btn" onclick="filterLog('weed',this)">除草</button>
+    <button class="filter-btn" onclick="filterLog('disease',this)">病害</button>
+    <button class="filter-btn" onclick="filterLog('photo',this)">照片</button>
+  </div>
+  <div id="logEntries"></div>
+</div>
+
+<!-- ===== FAQ ===== -->
+<div id="faq" class="panel">
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">草坪出现圆形棕色斑块怎么办？<span class="faq-arrow">▼</span></div><div class="faq-a">这很可能是<strong>棕色斑块病（Brown Patch）</strong>，Georgia夏天最常见的霉菌问题。立刻用<strong>Scotts DiseaseEx</strong>均匀撒在患处和周边，24小时内开始起效。同时检查是否浇水过多或傍晚浇水，调整为早上深浇。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">浇多少水才算"1英寸"？<span class="faq-arrow">▼</span></div><div class="faq-a">最简单的办法：把一个空金枪鱼罐头盒（高约1英寸）放在草坪上，开始计时，等罐子里积满1英寸水时停止。记录分钟数，以后每次设置同样时间。一般喷灌需要20–30分钟。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">施肥之后多久能浇水？<span class="faq-arrow">▼</span></div><div class="faq-a">施肥后<strong>24–48小时内不要浇水</strong>，让肥料充分附着。过早浇水会把肥料冲走。如果遇到自然降雨适量也没关系。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">喷了除草剂之后多久能割草？<span class="faq-arrow">▼</span></div><div class="faq-a">喷Ortho Weed B Gon或Celsius WG后，<strong>至少等48小时再割草</strong>。最好喷药前先割一次草，然后等草稍微长出来后再喷，效果更好。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">草坪有地方稀疏怎么处理？<span class="faq-arrow">▼</span></div><div class="faq-a">先检查光照——百慕大草需要每天至少6小时直射阳光。光照够的话，在稀疏区域额外撒一些百慕大草种，配合施肥，几周后会慢慢填满。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">纽扣草喷了好几次还是在长，正常吗？<span class="faq-arrow">▼</span></div><div class="faq-a">完全正常。弗吉尼亚纽扣草<strong>需要整个夏天持续喷3–4次</strong>才能有明显效果。坚持每2–3周喷一次，到八月底会看到明显减少。土里的种子可能明年还会再冒出来，每年夏天都要持续处理。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">割草机刀片需要磨吗？<span class="faq-arrow">▼</span></div><div class="faq-a">需要！钝刀片会<strong>撕裂草叶</strong>导致边缘变棕。建议每个生长季（5–9月）磨一次刀，五金店或割草机专卖店磨刀约$10–15。磨刀后草坪颜色会明显更绿。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">冬天草变棕色了需要做什么？<span class="faq-arrow">▼</span></div><div class="faq-a">什么都不用做！百慕大草冬天休眠变棕完全正常。<strong>不要浇水，不要施肥，不要割草。</strong>等来年三月土壤温度回升，它自己返青变绿。</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">可以同时施肥和除草剂吗？<span class="faq-arrow">▼</span></div><div class="faq-a">最好<strong>分开进行，间隔至少一周</strong>，避免化学刺激。如果是Scotts Turf Builder Weed &amp; Feed二合一产品则没问题，配方已调好比例。</div></div>
+</div>
+
+
+
+<nav class="bottom-nav" aria-label="手机快捷导航">
+  <button onclick="switchTabById('weedai')" data-tab-short="weedai"><span>📷</span>识草</button>
+  <button onclick="switchTabById('log')" data-tab-short="log"><span>📋</span>日志</button>
+  <button onclick="switchTabById('monthly')" data-tab-short="monthly"><span>📅</span>计划</button>
+  <button onclick="switchTabById('tips')" data-tab-short="tips"><span>💬</span>提问</button>
+</nav>
+
+<script>
+
+function switchTabById(id) {
+  const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'"));
+  switchTab(id, btn || null);
+  document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.toggle('active', b.dataset.tabShort === id));
+  const panel = document.getElementById(id);
+  if (panel) panel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function toggleLargeText() {
+  document.body.classList.toggle('large-text');
+  localStorage.setItem('largeTextMode', document.body.classList.contains('large-text') ? '1' : '0');
+}
+function syncBottomNav(id) {
+  document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.toggle('active', b.dataset.tabShort === id));
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  syncBottomNav(id);
+}
+function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+// ===== AI WEED ID =====
+let weedImageBase64 = null;
+let weedImageDataUrl = null;
+let lastWeedAnalysis = null;
+
+const AI_ENDPOINT = '/api/analyze-weed';
+
+const productLibrary = {
+  virginiaButtonweed: {
+    name: '弗吉尼亚纽扣草 / Virginia Buttonweed',
+    confidence: 'Demo 72%', risk: '高',
+    products: ['Celsius WG（Amazon，百慕大草坪常用选择）', 'Ortho Weed B Gon Max（Amazon / Home Depot，通用阔叶杂草）'],
+    steps: ['喷药前后48小时尽量不要割草', '选择早上或傍晚无风时点喷，避开95°F以上高温', '每2–3周复查一次，夏季通常需要连续处理3–4轮', '不要手拔，断根会刺激扩散'],
+    tips: ['保持百慕大草1–1.5英寸高度', '减少过度浇水，早上深浇', '秋季和春季使用pre-emergent降低复发']
+  },
+  crabgrass: {
+    name: '马唐草 / Crabgrass', confidence: 'Demo 64%', risk: '中',
+    products: ['Scotts Halts（春季预防）', '适合百慕大草坪的quinclorac类除草剂（购买前确认标签）'],
+    steps: ['小面积可以点喷', '大面积优先做春季预防', '施药后按标签等待再割草或浇水'],
+    tips: ['三月土温约55°F时做pre-emergent', '保持草坪茂密，减少裸土']
+  },
+  nutsedge: {
+    name: '香附子 / Nutsedge', confidence: 'Demo 61%', risk: '中',
+    products: ['Ortho Nutsedge Killer（Home Depot / Lowe\'s）', 'SedgeHammer（Amazon）'],
+    steps: ['不要拔，地下小块茎会继续繁殖', '点喷叶片，7–14天观察变黄', '必要时按标签复喷'],
+    tips: ['检查低洼积水区', '避免频繁浅浇']
+  },
+  disease: {
+    name: '疑似病斑/黄斑，不一定是杂草', confidence: 'Demo 58%', risk: '中',
+    products: ['Scotts DiseaseEx（Amazon / Home Depot）'],
+    steps: ['观察是否为圆形黄斑或棕斑', '早上浇水，停止傍晚浇水', '按标签撒DiseaseEx并覆盖斑块外圈'],
+    tips: ['湿热月份少量多次观察', '避免过量氮肥']
+  }
+};
+
+document.getElementById('weedFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const preview = document.getElementById('weedPreview');
+    preview.src = ev.target.result;
+    preview.style.display = 'block';
+    document.getElementById('uploadArea').style.display = 'none';
+    document.getElementById('analyzeBtn').style.display = 'block';
+    weedImageDataUrl = ev.target.result;
+    weedImageBase64 = ev.target.result.split(',')[1];
+    document.getElementById('weedResult').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+async function analyzeWeed() {
+  if (!weedImageBase64) return;
+  document.getElementById('analyzeBtn').disabled = true;
+  document.getElementById('weedLoading').style.display = 'block';
+  document.getElementById('weedResult').style.display = 'none';
+
+  try {
+    const response = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imageBase64: weedImageBase64, lawnType: 'Bermuda grass', location: 'Smyrna, GA 30080' })
+    });
+    if (!response.ok) throw new Error('No backend connected');
+    const data = await response.json();
+    showWeedAnalysis(normalizeWeedResponse(data), false);
+  } catch (err) {
+    // Demo fallback: keeps the prototype useful without exposing API keys in the browser.
+    const demo = createDemoWeedAnalysis();
+    showWeedAnalysis(demo, true);
+  }
+
+  document.getElementById('weedLoading').style.display = 'none';
+  document.getElementById('analyzeBtn').disabled = false;
+}
+
+function normalizeWeedResponse(data) {
+  return {
+    weedName: data.weedName || data.name || '无法确定 / Unknown',
+    confidence: data.confidence || '需要人工复核',
+    risk: data.risk || '中',
+    products: data.products || [],
+    steps: data.steps || [],
+    tips: data.tips || [],
+    source: 'AI后端分析'
+  };
+}
+
+function createDemoWeedAnalysis() {
+  const keys = Object.keys(productLibrary);
+  const pick = productLibrary[keys[Math.floor(Date.now() / 1000) % keys.length]];
+  return { weedName: pick.name, confidence: pick.confidence, risk: pick.risk, products: pick.products, steps: pick.steps, tips: pick.tips, source: '本地Demo分析' };
+}
+
+function showWeedAnalysis(result, isDemo) {
+  lastWeedAnalysis = result;
+  document.getElementById('weedConfidence').innerHTML = `
+    <span class="confidence-pill">来源：${result.source}</span>
+    <span class="confidence-pill">可信度：${result.confidence}</span>
+    <span class="confidence-pill">危害：${result.risk}</span>`;
+  document.getElementById('weedResultContent').textContent = `🌿 杂草/问题：${result.weedName}
+
+🧴 推荐产品：
+${bulletList(result.products)}
+
+📋 处理方法：
+${bulletList(result.steps)}
+
+💡 草坪护理建议：
+${bulletList(result.tips)}
+
+${isDemo ? '⚠️ 当前为Demo结果：真实识别需要连接后端AI视觉模型，并由你根据产品标签和当地规定复核。' : '⚠️ 使用任何除草剂前，请阅读产品标签，确认适用于百慕大草坪。'}`;
+  document.getElementById('weedResult').style.display = 'block';
+}
+
+function bulletList(items) { return (items || []).map(x => '• ' + x).join('\n') || '• 暂无'; }
+
+function resetWeedAnalyzer() {
+  weedImageBase64 = null; weedImageDataUrl = null; lastWeedAnalysis = null;
+  document.getElementById('weedFileInput').value = '';
+  document.getElementById('weedPreview').style.display = 'none';
+  document.getElementById('uploadArea').style.display = 'block';
+  document.getElementById('analyzeBtn').style.display = 'none';
+  document.getElementById('weedResult').style.display = 'none';
+}
+
+function saveWeedResultToLog() {
+  if (!lastWeedAnalysis) { alert('请先完成一次识别'); return; }
+  const today = new Date().toISOString().slice(0,10);
+  const entry = {
+    id: Date.now(), date: today, type: 'weed',
+    title: 'AI识别：' + lastWeedAnalysis.weedName,
+    notes: `危害：${lastWeedAnalysis.risk}；推荐：${(lastWeedAnalysis.products || []).join(' / ')}；步骤：${(lastWeedAnalysis.steps || []).join('；')}`,
+    rating: 0,
+    photo: weedImageDataUrl
+  };
+  logEntries.unshift(entry);
+  saveLog(); renderLog(); updateStats(); updateHoaSummary();
+  alert('已保存到护理日志，可用于HOA记录。');
+}
+
+// ===== CHAT =====
+let chatHistory = [];
+
+function sendQuick(text) { document.getElementById('chatInput').value = text; sendChat(); }
+function chatKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } }
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChatBubble(text, 'user');
+  chatHistory.push({ role: 'user', content: text });
+  const loadingId = addChatBubble('正在思考…', 'bot loading');
+  try {
+    const response = await fetch('/api/lawn-chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory, context: 'Bermuda lawn in Smyrna, GA 30080' })
+    });
+    if (!response.ok) throw new Error('No backend connected');
+    const data = await response.json();
+    const reply = data.reply || data.text || localLawnAnswer(text);
+    chatHistory.push({ role: 'assistant', content: reply });
+    updateChatBubble(loadingId, reply);
+  } catch (err) {
+    const reply = localLawnAnswer(text);
+    chatHistory.push({ role: 'assistant', content: reply });
+    updateChatBubble(loadingId, reply);
+  }
+}
+
+function localLawnAnswer(text) {
+  const t = text.toLowerCase();
+  if (text.includes('黄斑') || text.includes('霉') || t.includes('brown')) return '黄斑可能是霉菌或浇水/施肥不均。先确认是否是圆形斑块；如果是，使用 Scotts DiseaseEx，且改成早上6–9点深浇，避免傍晚浇水。';
+  if (text.includes('纽扣') || t.includes('buttonweed')) return '纽扣草建议用 Celsius WG 或 Ortho Weed B Gon Max 点喷。喷药前后48小时不要割草，夏季每2–3周复查一次，通常需要连续处理3–4轮。';
+  if (text.includes('浇水')) return '百慕大草建议每周约1英寸水，早上深浇。用金枪鱼罐头测喷灌时间，避免每天浅浇或傍晚浇水。';
+  if (text.includes('施肥')) return '生长季可用 Scotts Turf Builder 百慕大专用肥。六月到八月以氮肥为主，九月后停止高氮，改低氮高钾帮助过冬。';
+  if (text.includes('割草')) return '百慕大草保持1–1.5英寸，每5–7天割一次。每次不要剪掉超过草高的1/3，刀片要锋利。';
+  return '建议先记录问题照片、日期、天气和近期护理操作。百慕大草在Georgia夏季重点是：早上深浇、1–1.5英寸勤割、按月施肥、杂草点喷、发现圆形黄斑及时防霉。';
+}
+
+function addChatBubble(text, cls) {
+  const messages = document.getElementById('chatMessages');
+  const id = 'bubble_' + Date.now();
+  const div = document.createElement('div');
+  div.className = 'chat-bubble ' + cls;
+  div.id = id;
+  div.style.whiteSpace = 'pre-wrap';
+  div.textContent = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return id;
+}
+
+function updateChatBubble(id, text) {
+  const el = document.getElementById(id);
+  if (el) { el.className = 'chat-bubble bot'; el.textContent = text; }
+  const messages = document.getElementById('chatMessages');
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// ===== LOG =====
+let logEntries = JSON.parse(localStorage.getItem('lawnLog') || '[]');
+let selectedRating = 0;
+let currentFilter = 'all';
+let logPhotoBase64 = null;
+
+function setRating(val, btn) {
+  selectedRating = val;
+  document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function previewLogPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const img = document.getElementById('logPhotoPreview');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    logPhotoBase64 = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function addLogEntry() {
+  const date = document.getElementById('logDate').value;
+  const type = document.getElementById('logType').value;
+  const title = document.getElementById('logTitle').value.trim();
+  const notes = document.getElementById('logNotes').value.trim();
+  if (!date || !title) { alert('请填写日期和具体操作'); return; }
+  const entry = { id: Date.now(), date, type, title, notes, rating: selectedRating, photo: logPhotoBase64 };
+  logEntries.unshift(entry);
+  saveLog(); resetLogForm(); renderLog(); updateStats(); updateHoaSummary();
+}
+
+function resetLogForm() {
+  if (localStorage.getItem('largeTextMode') === '1') document.body.classList.add('large-text');
+  syncBottomNav('monthly');
+  document.getElementById('logDate').valueAsDate = new Date();
+  document.getElementById('logTitle').value = '';
+  document.getElementById('logNotes').value = '';
+  document.getElementById('logPhoto').value = '';
+  document.getElementById('logPhotoPreview').style.display = 'none';
+  document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  selectedRating = 0; logPhotoBase64 = null;
+}
+
+function saveLog() { localStorage.setItem('lawnLog', JSON.stringify(logEntries)); }
+function deleteEntry(id) { if (!confirm('确认删除这条记录？')) return; logEntries = logEntries.filter(e => e.id !== id); saveLog(); renderLog(); updateStats(); updateHoaSummary(); }
+function filterLog(type, btn) { currentFilter = type; document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderLog(); }
+
+const typeLabels = { fertilize:'🌿 施肥', mow:'✂️ 割草', weed:'🌱 除草', water:'💧 浇水', disease:'🍄 病害', photo:'📸 照片', general:'📝 其他' };
+const typeClasses = { fertilize:'type-fertilize', mow:'type-mow', weed:'type-weed', water:'type-water', disease:'type-disease', photo:'type-photo', general:'type-general' };
+const ratingLabels = ['','😟 差','😐 一般','🙂 还好','😊 良好','🌟 很棒'];
+
+function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+function renderLog() {
+  const container = document.getElementById('logEntries');
+  const filtered = currentFilter === 'all' ? logEntries : logEntries.filter(e => e.type === currentFilter);
+  if (filtered.length === 0) { container.innerHTML = '<div class="no-logs">📋 暂无记录<br><span style="font-size:0.82rem">添加第一条护理记录吧！</span></div>'; return; }
+  container.innerHTML = filtered.map(e => `
+    <div class="log-entry">
+      <button class="log-delete-btn" onclick="deleteEntry(${e.id})">🗑</button>
+      <div class="log-entry-header"><div class="log-entry-date">📅 ${formatDate(e.date)}</div><span class="log-entry-type ${typeClasses[e.type] || 'type-general'}">${typeLabels[e.type] || e.type}</span></div>
+      <div class="log-entry-title">${escapeHtml(e.title)}</div>
+      ${e.notes ? `<div class="log-entry-notes">${escapeHtml(e.notes)}</div>` : ''}
+      ${e.rating ? `<div class="log-entry-rating">${ratingLabels[e.rating]}</div>` : ''}
+      ${e.photo ? `<img src="${e.photo}" class="log-entry-img" alt="草坪照片">` : ''}
+    </div>`).join('');
+}
+
+function formatDate(d) { if (!d) return ''; const [y,m,day] = d.split('-'); return `${y}年${parseInt(m)}月${parseInt(day)}日`; }
+
+function updateStats() {
+  document.getElementById('statTotal').textContent = logEntries.length;
+  document.getElementById('statDays').textContent = new Set(logEntries.map(e => e.date)).size;
+  document.getElementById('statPhotos').textContent = logEntries.filter(e => e.photo).length;
+}
+
+function updateHoaSummary() {
+  const el = document.getElementById('hoaSummary');
+  if (!el) return;
+  if (!logEntries.length) { el.textContent = '还没有记录。添加护理记录后，这里会自动生成给HOA看的维护摘要。'; return; }
+  const sorted = [...logEntries].sort((a,b) => a.date.localeCompare(b.date));
+  const first = formatDate(sorted[0].date), last = formatDate(sorted[sorted.length - 1].date);
+  const counts = logEntries.reduce((acc,e)=>{ acc[e.type]=(acc[e.type]||0)+1; return acc; },{});
+  const parts = Object.keys(counts).map(k => `${typeLabels[k] || k} ${counts[k]}次`).join('，');
+  el.textContent = `HOA摘要：${first} 至 ${last}，共记录 ${logEntries.length} 条，覆盖 ${new Set(logEntries.map(e=>e.date)).size} 个护理日期；包含 ${parts}；照片证据 ${logEntries.filter(e=>e.photo).length} 张。`;
+}
+
+// ===== HOA EXPORT =====
+function exportHOA() {
+  const today = new Date().toLocaleDateString('zh-CN');
+  const sorted = [...logEntries].sort((a,b) => b.date.localeCompare(a.date));
+  let html = `<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><title>草坪护理记录 - HOA报告</title><style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:36px auto;padding:0 28px;color:#222;}h1{color:#2d6a4f;border-bottom:3px solid #2d6a4f;padding-bottom:10px;}h2{color:#2d6a4f;margin-top:28px}.meta{color:#666;font-size:.9rem;margin-bottom:18px;line-height:1.7}.summary{background:#f0f7f2;border-radius:12px;padding:14px 16px;margin:18px 0;line-height:1.7}.stats{display:flex;gap:14px;margin:18px 0;flex-wrap:wrap}.stat{background:#f0f7f2;border-radius:10px;padding:12px 18px;text-align:center}.stat-n{font-size:1.8rem;font-weight:700;color:#2d6a4f}.stat-l{font-size:.8rem;color:#666}table{width:100%;border-collapse:collapse;margin-top:12px}th{background:#2d6a4f;color:white;padding:9px;text-align:left;font-size:.86rem}td{padding:9px;border-bottom:1px solid #eee;font-size:.84rem;vertical-align:top}tr:nth-child(even){background:#f9f9f9}.photo-cell img{max-width:120px;max-height:90px;border-radius:6px}.no-print{margin:14px 0;padding:10px 16px;border:0;border-radius:10px;background:#2d6a4f;color:white;font-weight:700}@media print{body{margin:18px}.no-print{display:none}td,th{font-size:.78rem}.photo-cell img{max-width:90px}}
+
+  /* ===== SENIOR-FRIENDLY UX ENHANCEMENTS ===== */
+  body.large-text { font-size: 112%; }
+  .skip-link { position:absolute; left:-999px; top:8px; background:#fff; color:#1a3a2a; padding:10px 14px; border-radius:8px; z-index:999; }
+  .skip-link:focus { left:12px; }
+  .home-guide { max-width:900px; margin:-18px auto 0; padding:0 16px 10px; position:relative; z-index:5; }
+  .guide-card { background:var(--white); border-radius:20px; box-shadow:var(--shadow); padding:18px; margin-bottom:14px; border:1px solid rgba(45,106,79,.08); }
+  .guide-card h2 { font-size:1.15rem; color:var(--green-dark); margin-bottom:8px; }
+  .guide-card p { font-size:.94rem; color:var(--text-mid); }
+  .primary-actions { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
+  @media(max-width:720px){ .primary-actions{grid-template-columns:1fr 1fr;} }
+  @media(max-width:430px){ .primary-actions{grid-template-columns:1fr;} }
+  .action-card { border:2px solid var(--green-pale); border-radius:16px; background:#fff; padding:16px 12px; text-align:left; cursor:pointer; min-height:112px; transition:.18s; font-family:inherit; }
+  .action-card:hover, .action-card:focus { border-color:var(--green-mid); transform:translateY(-1px); outline:none; }
+  .action-card .big-icon { font-size:2rem; display:block; margin-bottom:6px; }
+  .action-card strong { display:block; color:var(--green-dark); font-size:1rem; margin-bottom:3px; }
+  .action-card span { display:block; color:var(--text-mid); font-size:.82rem; line-height:1.45; }
+  .ux-toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .ux-btn { min-height:44px; padding:10px 14px; border-radius:12px; border:1px solid var(--gray-mid); background:#fff; font-family:inherit; font-weight:700; color:var(--green-dark); cursor:pointer; }
+  .ux-btn:hover { background:var(--green-pale); }
+  .guided-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+  @media(max-width:650px){ .guided-steps{grid-template-columns:1fr;} }
+  .step-pill { background:#f8f9fa; border-radius:14px; padding:12px; border-left:4px solid var(--green-light); }
+  .step-pill b { color:var(--green-dark); display:block; margin-bottom:3px; }
+  .step-pill small { color:var(--text-mid); line-height:1.4; display:block; }
+  .trust-note { background:#fff8e8; border:1px solid #f4a261; border-radius:14px; padding:12px 14px; margin-top:12px; color:#6d421b; font-size:.88rem; }
+  .tabs { top:0; }
+  .tab-btn { min-height:48px; font-size:.9rem; }
+  button, input, select, textarea { font-size:16px; }
+  .bottom-nav { position:fixed; left:0; right:0; bottom:0; background:#fff; box-shadow:0 -4px 18px rgba(0,0,0,.12); display:none; grid-template-columns:repeat(4,1fr); z-index:200; padding:6px 4px max(6px, env(safe-area-inset-bottom)); }
+  .bottom-nav button { border:0; background:#fff; color:var(--text-mid); font-family:inherit; font-size:.72rem; padding:7px 2px; border-radius:10px; min-height:52px; }
+  .bottom-nav button span { display:block; font-size:1.35rem; line-height:1; margin-bottom:3px; }
+  .bottom-nav button.active { background:var(--green-pale); color:var(--green-dark); font-weight:700; }
+  @media(max-width:640px){ body{padding-bottom:72px;} .bottom-nav{display:grid;} .tabs{display:none;} .hero{padding-bottom:34px;} }
+  .help-text { font-size:.82rem; color:var(--text-mid); background:#f7fbf8; border-radius:10px; padding:8px 10px; margin-top:6px; }
+  .log-form .form-row label::after { content:' '; }
+
+</style></head><body>
+<a class="skip-link" href="#monthly">跳到主要内容</a>
+<button class="no-print" onclick="window.print()">打印 / 保存为PDF</button><h1>🌿 草坪护理记录报告</h1><div class="meta">地址：Smyrna, GA 30080 | 草坪类型：百慕大草（Bermuda Grass）<br>报告生成日期：${today} | 记录数：${logEntries.length} 条</div>
+<div class="stats"><div class="stat"><div class="stat-n">${logEntries.length}</div><div class="stat-l">护理记录</div></div><div class="stat"><div class="stat-n">${new Set(logEntries.map(e=>e.date)).size}</div><div class="stat-l">护理天数</div></div><div class="stat"><div class="stat-n">${logEntries.filter(e=>e.photo).length}</div><div class="stat-l">照片证据</div></div></div>
+<div class="summary">${escapeHtml(document.getElementById('hoaSummary').textContent)}</div><h2>📋 详细护理记录</h2><table><thead><tr><th>日期</th><th>类型</th><th>操作内容</th><th>备注</th><th>状况</th><th>照片</th></tr></thead><tbody>
+${sorted.map(e=>`<tr><td>${formatDate(e.date)}</td><td>${typeLabels[e.type]||e.type}</td><td>${escapeHtml(e.title)}</td><td>${escapeHtml(e.notes)||'—'}</td><td>${e.rating?ratingLabels[e.rating]:'—'}</td><td class="photo-cell">${e.photo?`<img src="${e.photo}">`:'—'}</td></tr>`).join('')}
+</tbody></table><p style="color:#888;font-size:.78rem;text-align:center;margin-top:24px">本报告由百慕大草坪护理手册自动生成 · ${today}</p></body></html>`;
+  const win = window.open('', '_blank'); win.document.write(html); win.document.close();
+}
+
+function exportCSV() {
+  const headers = ['日期','类型','操作内容','备注','状况评分','是否有照片'];
+  const rows = logEntries.map(e => [e.date, typeLabels[e.type] || e.type, '"' + (e.title||'').replace(/"/g,'""') + '"', '"' + (e.notes||'').replace(/"/g,'""') + '"', e.rating ? ratingLabels[e.rating] : '', e.photo ? '是' : '否']);
+  const csv = [headers.join(','), ...rows.map(r=>r.join(','))].join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '草坪护理记录_' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), entries: logEntries }, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'lawn-care-backup_' + new Date().toISOString().slice(0,10) + '.json'; a.click();
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('largeTextMode') === '1') document.body.classList.add('large-text');
+  syncBottomNav('monthly');
+  document.getElementById('logDate').valueAsDate = new Date();
+  renderLog();
+  updateStats();
+  updateHoaSummary();
+});
+</script>
+</body>
+</html>
