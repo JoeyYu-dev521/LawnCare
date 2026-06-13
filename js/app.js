@@ -1,1 +1,1 @@
-/* V2.2.2 hotfix: script is embedded in index.html. */
+/* V2.3: script embedded in index.html for deployment safety. */

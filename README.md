@@ -1,5 +1,7 @@
 # LawnCare
 
-## V2.2.2 Hotfix
+## V2.3
 
-Restores the complete UI with a self-contained `index.html` so CSS/JS path issues cannot blank the page.
+Adds 6 Week Roadmap, Insights, Weekly Summary, and HOA plan progress reporting.
+
+This package uses a self-contained index.html for deployment safety.
